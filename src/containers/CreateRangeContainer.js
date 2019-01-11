@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import DateRange from "../components/DateRange"
 import { fetchPostMeetingRange } from '../adapters/index.js'
+import { Redirect } from 'react-router-dom'
 
 export default class CreateRangeContainer extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      redirect: false,
       time: {
         beginDate: new Date(),
         endDate: new Date(),
@@ -18,7 +20,6 @@ export default class CreateRangeContainer extends Component {
       }
     }
   }
-
 
   handleNameChange = (e) => {
     this.setState({
@@ -51,9 +52,16 @@ export default class CreateRangeContainer extends Component {
     fetchPostMeetingRange({meeting_range: {
       begin_date: this.state.time.beginDate, end_date: this.state.time.endDate
     }})
+
+    this.setState({
+      redirect: !this.state.redirect
+    })
   }
 
    render() {
+     if (this.state.redirect) {
+       return <Redirect to={{ pathname: '/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate} }}>My route</Redirect>
+     } else {
      return (
         <div>
           <label>
@@ -83,5 +91,6 @@ export default class CreateRangeContainer extends Component {
 
         </div>
      )
+   }
    }
  }

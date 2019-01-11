@@ -6,10 +6,13 @@ const DateRange = (props) => {
   return(
     <div>
   <label> Begin </label>
-      <DatePicker onChange={props.handleBeginDatePicker}
+      <DatePicker
+       onChange={props.handleBeginDatePicker}
       selected={props.beginDate}/>
   <label> End </label>
-      <DatePicker onChange={props.handleEndDatePicker}
+      <DatePicker
+      
+       onChange={props.handleEndDatePicker}
       selected={props.endDate}/>
     </div>
   )
