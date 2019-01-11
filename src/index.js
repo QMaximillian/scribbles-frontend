@@ -9,9 +9,11 @@ import { createBrowserHistory } from 'history'
 const history = createBrowserHistory()
 
 ReactDOM.render(
+  <div style={{backgroundColor: '#add8e6', height: '100vh'}}>
   <Router history={history}>
     <App />
-  </Router>, document.getElementById('root')
+  </Router> </div>, document.getElementById('root')
+
 )
 
 // If you want your app to work offline and load faster, you can change
