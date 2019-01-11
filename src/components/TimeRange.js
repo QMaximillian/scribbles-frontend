@@ -8,8 +8,16 @@ const TimeRange = (props) => {
       <DatePicker
       showTimeSelect
       showTimeSelectOnly
+      onChange={props.handleBeginTimeChange}
+      selected={props.beginTime}
       dateFormat="h:mm aa"
-      timeIntervals={props.intervals}
+      />
+      <DatePicker
+      showTimeSelect
+      showTimeSelectOnly
+      onChange={props.handleEndTimeChange}
+      selected={props.endTime}
+      dateFormat="h:mm aa"
       />
     </div>
   )

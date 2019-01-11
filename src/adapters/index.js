@@ -3,7 +3,7 @@ export const fetchPostMeetingRange = (body) => {
     method: 'POST',
     headers: headers(),
     body: JSON.stringify(body),
-  }).then(resp => resp.json()).then(console.log)
+  }).then(resp => resp.json())
 }
 
 export const headers = () => {

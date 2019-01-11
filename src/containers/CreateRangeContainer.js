@@ -8,6 +8,7 @@ export default class CreateRangeContainer extends Component {
     super(props)
 
     this.state = {
+      meeting_range_id: 0,
       redirect: false,
       time: {
         beginDate: new Date(),
@@ -51,16 +52,15 @@ export default class CreateRangeContainer extends Component {
   handleFetchPost = () => {
     fetchPostMeetingRange({meeting_range: {
       begin_date: this.state.time.beginDate, end_date: this.state.time.endDate
-    }})
-
-    this.setState({
-      redirect: !this.state.redirect
-    })
+    }}).then(resp => this.setState({
+      redirect: !this.state.redirect,
+      meeting_range_id: resp.id
+    }))
   }
 
    render() {
      if (this.state.redirect) {
-       return <Redirect to={{ pathname: '/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate} }}>My route</Redirect>
+       return <Redirect to={{ pathname: '/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}>My route</Redirect>
      } else {
      return (
         <div>
