@@ -2,6 +2,7 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 
+
 const DateRange = (props) => {
   return(
     <div>
@@ -11,7 +12,6 @@ const DateRange = (props) => {
       selected={props.beginDate}/>
   <label> End </label>
       <DatePicker
-      
        onChange={props.handleEndDatePicker}
       selected={props.endDate}/>
     </div>

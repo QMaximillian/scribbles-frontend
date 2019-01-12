@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import Day from '../components/Day'
 
+
 export default class CreateTimesContainer extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-
+      fetch: false
     }
   }
 
@@ -25,15 +26,23 @@ export default class CreateTimesContainer extends Component {
 
   mapDays = () => {
     return this.getDates(new Date(this.props.location.state.beginDate), new Date(this.props.location.state.endDate)).map(day => {
-      return <Day day={day}/>
+      return <Day day={day} fetch={this.state.fetch} meeting_range_id={this.props.location.state.meeting_range_id}/>
     })
   }
 
    render() {
+
      return (
+       <>
         <div>
       {this.mapDays()}
         </div>
+        <div>
+          <button onClick={() => this.setState({
+            fetch: !this.state.fetch
+          })}>Submit Times</button>
+        </div>
+      </>
      )
    }
  }

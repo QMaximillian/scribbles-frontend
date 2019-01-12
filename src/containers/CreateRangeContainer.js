@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import DateRange from "../components/DateRange"
 import { fetchPostMeetingRange } from '../adapters/index.js'
 import { Redirect } from 'react-router-dom'
+import moment from 'moment'
 
 export default class CreateRangeContainer extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ export default class CreateRangeContainer extends Component {
         ...this.state.time,
         beginDate: date
       }
-    })
+    }, () => console.log(this.state.time.beginDate))
   }
 
   handleEndDatePicker = (date) => {
@@ -46,12 +47,12 @@ export default class CreateRangeContainer extends Component {
         ...this.state.time,
         endDate: date
       }
-    }, () => console.log(this.state.time.endDate))
+    }, () => console.log(this.state.time))
   }
 
   handleFetchPost = () => {
     fetchPostMeetingRange({meeting_range: {
-      begin_date: this.state.time.beginDate, end_date: this.state.time.endDate
+      begin_date: moment(this.state.time.beginDate).format(), end_date: moment(this.state.time.endDate).format()
     }}).then(resp => this.setState({
       redirect: !this.state.redirect,
       meeting_range_id: resp.id

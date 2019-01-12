@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TimeRange from './TimeRange'
 import moment from 'moment'
+import {fetchCreateTime} from '../adapters/index.js'
 
 class Day extends Component {
   constructor(props) {
@@ -12,10 +13,16 @@ class Day extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.fetch) {
+      fetchCreateTime({meeting_times: {meeting_range_id: this.props.meeting_range_id, user_id: 1, day: this.state.beginTime, begin_time: moment(this.state.beginTime).utc().format(), end_time: moment(this.state.endTime).utc().format()}})
+    }
+  }
+
   handleBeginTimeChange = (date) => {
     this.setState({
       beginTime: date
-    })
+    }, () => console.log(moment(this.state.beginTime).utc().format()))
   }
 
   handleEndTimeChange = (date) => {
