@@ -15,7 +15,7 @@ class Day extends Component {
 
   componentDidUpdate() {
     if (this.props.fetch) {
-      fetchCreateTime({meeting_times: {meeting_range_id: this.props.meeting_range_id, user_id: 1, day: this.state.beginTime, begin_time: moment(this.state.beginTime).utc().format(), end_time: moment(this.state.endTime).utc().format()}})
+      fetchCreateTime({meeting_time: {meeting_range_id: this.props.meeting_range_id, user_id: 1, day: this.state.beginTime, begin_time: moment(this.state.beginTime).utc().format(), end_time: moment(this.state.endTime).utc().format()}})
     }
   }
 

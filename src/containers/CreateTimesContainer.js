@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 import moment from 'moment'
 import Day from '../components/Day'
 
@@ -8,7 +9,8 @@ export default class CreateTimesContainer extends Component {
     super(props)
 
     this.state = {
-      fetch: false
+      fetch: false,
+      redirect: false
     }
   }
 
@@ -30,19 +32,29 @@ export default class CreateTimesContainer extends Component {
     })
   }
 
-   render() {
+  handleRedirect = () => {
+    this.setState({
+      fetch: !this.state.fetch,
+      redirect: true
+    })
+  }
 
-     return (
-       <>
-        <div>
-      {this.mapDays()}
-        </div>
-        <div>
-          <button onClick={() => this.setState({
-            fetch: !this.state.fetch
-          })}>Submit Times</button>
-        </div>
-      </>
-     )
+   render() {
+     if (this.state.redirect) {
+       return (
+         <Redirect />
+       )
+     } else {
+       return (
+         <>
+          <div>
+        {this.mapDays()}
+          </div>
+          <div>
+            <button onClick={() => this.handleRedirect()}>Submit Times</button>
+          </div>
+        </>
+       )
+     }
    }
  }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import DateRange from "../components/DateRange"
-import { fetchPostMeetingRange } from '../adapters/index.js'
+import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
+
 
 export default class CreateRangeContainer extends Component {
   constructor(props) {
@@ -17,8 +18,9 @@ export default class CreateRangeContainer extends Component {
         intervals: 15
       },
       user: {
-        firstName: '',
-        lastName: ''
+        first_name: '',
+        last_name: '',
+        email: ''
       }
     }
   }
@@ -53,32 +55,54 @@ export default class CreateRangeContainer extends Component {
   handleFetchPost = () => {
     fetchPostMeetingRange({meeting_range: {
       begin_date: moment(this.state.time.beginDate).format(), end_date: moment(this.state.time.endDate).format()
-    }}).then(resp => this.setState({
-      redirect: !this.state.redirect,
+    }})
+    .then(resp => this.setState({
       meeting_range_id: resp.id
     }))
+    .then(resp => {
+      this.handleUserCreatePost()
+      this.setState({
+        redirect: !this.state.redirect,
+      })
+    })
+
+
+
+  }
+
+  handleUserCreatePost = () => {
+    fetchCreateUser({user: {...this.state.user, meeting_range_id: this.state.meeting_range_id}})
   }
 
    render() {
      if (this.state.redirect) {
        return <Redirect to={{ pathname: '/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}>My route</Redirect>
      } else {
+       console.log({user: {...this.state.user, meeting_range_id: this.state.meeting_range_id}})
      return (
         <div>
           <label>
             First Name
           </label>
           <input onChange={this.handleNameChange}
-            value={this.state.user.firstName}
-            name="firstName">
+            value={this.state.user.first_name}
+            name="first_name">
           </input>
           <label>
             Last Name
           </label>
           <input
             onChange={this.handleNameChange}
-            value={this.state.user.lastName}
-            name="lastName">
+            value={this.state.user.last_name}
+            name="last_name">
+          </input>
+          <label>
+            Email
+          </label>
+          <input
+            onChange={this.handleNameChange}
+            value={this.state.user.email}
+            name="email">
           </input>
           <DateRange
             handleBeginDatePicker={this.handleBeginDatePicker}

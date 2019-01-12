@@ -1,4 +1,3 @@
-import moment from 'moment'
 export const fetchPostMeetingRange = (body) => {
   return fetch('http://localhost:3001/meeting_ranges', {
     method: 'POST',
@@ -12,7 +11,15 @@ export const fetchCreateTime = (body) => {
     method: "POST",
     headers: headers(),
     body: JSON.stringify(body),
-  }).then(resp => resp.json()).then(resp => console.log(moment(resp.begin_time).format()))
+  }).then(resp => resp.json())
+}
+
+export const fetchCreateUser = (body) => {
+  return fetch('http://localhost:3001/users', {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify(body)
+  }).then(resp => resp.json())
 }
 
 export const headers = () => {
