@@ -12,9 +12,9 @@ class App extends Component {
 
       <Switch>
       <Route exact path="/home" render={(props) => < HomeContainer {...props}/>}/>
-      <Route exact path="/create/range" render={(props) => <CreateRangeContainer {...props}/>}/>
-      <Route exact path="/create/times" render={(props) => <CreateTimesContainer {...props}/>}/>
-      <Route exact path="/:uuid" render={(props) => <MeetingContainer {...props}/>}/>
+      <Route exact path="/meeting_range/create/range" render={(props) => <CreateRangeContainer {...props}/>}/>
+      <Route exact path="/meeting_range/create/times" render={(props) => <CreateTimesContainer {...props}/>}/>
+      <Route exact path="/meeting_range/:id" render={(props) => <MeetingContainer {...props}/>}/>
 
       </Switch>
 

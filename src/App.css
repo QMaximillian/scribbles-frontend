@@ -1,1 +1,10 @@
+span:before {
+    content:" ";
+    display:inline-block;
+    width:32px;
+}
 
+body {
+  background-color: '#add8e6';
+  height: '100vh';
+}

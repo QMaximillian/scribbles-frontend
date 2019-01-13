@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import {Redirect} from 'react-router-dom'
 import moment from 'moment'
-import Day from '../components/Day'
+import CreateDay from '../components/CreateDay'
+import { withRouter } from 'react-router'
 
-
-export default class CreateTimesContainer extends Component {
+class CreateTimesContainer extends Component {
   constructor(props){
     super(props)
 
@@ -28,21 +28,22 @@ export default class CreateTimesContainer extends Component {
 
   mapDays = () => {
     return this.getDates(new Date(this.props.location.state.beginDate), new Date(this.props.location.state.endDate)).map(day => {
-      return <Day day={day} fetch={this.state.fetch} meeting_range_id={this.props.location.state.meeting_range_id}/>
+      return <CreateDay day={day} fetch={this.state.fetch} meeting_range_id={this.props.location.state.meeting_range_id}/>
     })
   }
 
-  handleRedirect = () => {
+  handleFetches = () => {
     this.setState({
-      fetch: !this.state.fetch,
-      redirect: true
+      fetch: !this.state.fetch
     })
   }
 
    render() {
+     console.log(this.props)
      if (this.state.redirect) {
        return (
-         <Redirect />
+         <Redirect to={"/meeting_range/" + this.props.location.state.meeting_range_id
+          }/>
        )
      } else {
        return (
@@ -51,10 +52,13 @@ export default class CreateTimesContainer extends Component {
         {this.mapDays()}
           </div>
           <div>
-            <button onClick={() => this.handleRedirect()}>Submit Times</button>
+            <button onClick={() => this.handleFetches()}>Save Times</button>
+            <button onClick={() => this.setState({redirect: !this.state.redirect})}>Go To Meeting Container</button>
           </div>
         </>
        )
      }
    }
  }
+
+ export default withRouter(CreateTimesContainer)

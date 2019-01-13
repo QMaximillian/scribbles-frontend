@@ -6,7 +6,7 @@ export default class HomeContainer extends Component {
      return (
         <div>
           Welcome to Scribble
-          <button onClick={() => this.props.history.push('/create/range')}>
+          <button onClick={() => this.props.history.push('meeting_range/create/range')}>
             Create A Scribble
           </button>
         </div>
