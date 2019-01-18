@@ -1,27 +1,55 @@
 import React from 'react'
-import DatePicker from 'react-datepicker'
-
+import moment from 'moment'
+import Time from './Time'
 
 const TimeRange = (props) => {
+
+  // onClick function that highlights choices that work
+  // fetch to create new times associated with User and MeetingRange
+
+    const getDateHoursMoment = () => {
+
+      const { beginTime, endTime, interval } = props
+      // console.log(beginTime)
+      let startTime = moment(beginTime)
+      let stopTime = moment(endTime)
+
+      let timeStops = []
+
+  if (interval !== undefined){
+      while(startTime < stopTime){
+        timeStops.push(moment(startTime).format('YYYY-MM-DD HH:mm Z'))
+        startTime.add(interval, 'minutes');
+      }
+    }
+    return timeStops
+  }
+
+  const mappedTimesAvailable = () => {
+    return getDateHoursMoment().map(time => {
+      return <Time
+            canClick={props.canClick}
+            user_id={props.user_id}
+            interval={props.interval}
+            time={time}
+            fetch={props.fetch}/>
+    })
+  }
+
   return(
+    <>
       <div>
-        <DatePicker
-        showTimeSelect
-        showTimeSelectOnly
-        onChange={props.handleBeginTimeChange}
-        selected={props.beginTime}
-        dateFormat="h:mm aa"
-        placeholderText="Choose a time"
-        />
-        <DatePicker
-        showTimeSelect
-        showTimeSelectOnly
-        onChange={props.handleEndTimeChange}
-        selected={props.endTime}
-        dateFormat="h:mm aa"
-        placeholderText="Choose a time"
-        />
+        <span>
+        {moment(props.beginTime).format('hh:mm a')}
+        </span>
+        <div>
+          {mappedTimesAvailable()}
+        </div>
+        <span>
+        {moment(props.endTime).format('hh:mm a')}
+        </span>
       </div>
+    </>
   )
 }
 

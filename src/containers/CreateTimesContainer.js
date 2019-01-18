@@ -10,7 +10,7 @@ class CreateTimesContainer extends Component {
 
     this.state = {
       fetch: false,
-      redirect: false
+      redirect: false,
     }
   }
 
@@ -42,7 +42,7 @@ class CreateTimesContainer extends Component {
      console.log(this.props)
      if (this.state.redirect) {
        return (
-         <Redirect to={"/meeting_range/" + this.props.location.state.meeting_range_id
+         <Redirect to={"/meeting_range/" + this.props.location.state.meeting_range_id + "/add"
           }/>
        )
      } else {

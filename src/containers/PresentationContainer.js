@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { fetchMeetingRange, fetchCreateInvitation, fetchUser } from '../adapters/index.js'
+import { fetchUser, fetchMeetingRange } from '../adapters/index'
 import moment from 'moment'
 import Day from '../components/Day'
 
-export default class MeetingContainer extends Component {
-
+export default class PresentationContainer extends Component {
   constructor(props) {
     super(props)
 
@@ -16,7 +15,9 @@ export default class MeetingContainer extends Component {
       newUser: '',
       interval: 0,
       email: '',
-      canClick: false
+      canClick: false,
+      joinedUsers: [],
+
     }
 
   }
@@ -36,7 +37,11 @@ export default class MeetingContainer extends Component {
     })
     .then(resp => {
       this.state.user_ids.forEach(user_id => {
-        fetchUser(user_id).then(console.log)
+        fetchUser(user_id).then(resp => {
+          this.setState({
+            joinedUsers: [...this.state.joinedUsers, resp]
+          }, () => console.log(this.state.joinedUsers))
+        })
       })
     })
   }
@@ -68,21 +73,13 @@ export default class MeetingContainer extends Component {
     })
   }
 
-  handleInvitationFetch = () => {
-    fetchCreateInvitation({
-      invitation: {
-        email: this.state.email,
-        link: `localhost:3000/meeting_range/${this.props.match.params.id}/`,
-      }
+  mappedJoinedUsers = () => {
+    return this.state.joinedUsers.map(user => {
+      return (<div>
+                {user.users.first_name}
+              </div>)
     })
   }
-
-  handleEmailInput = (e) => {
-    this.setState({
-      email: e.target.value
-    })
-  }
-
 
 
   // fetch to create new User
@@ -91,7 +88,7 @@ export default class MeetingContainer extends Component {
 
    render() {
      console.log(this.state)
-     if (this.state.user_ids[0]) {
+     if (this.state.users[0]) {
      return (
        <>
         <div>
@@ -100,17 +97,12 @@ export default class MeetingContainer extends Component {
           {this.mappedMeetingRange()}
         </div>
         <div>
-          <div>
-
-          </div>
-          <input
-          value={this.state.email} onChange={this.handleEmailInput}></input>
-          <button onClick={() => this.handleInvitationFetch()}> Add User</button>
+          {this.mappedJoinedUsers()}
         </div>
       </>
      )
    } else {
-     return <div>{this.mappedMeetingRange()}</div>
+     return <div>LOADING...</div>
    }
    }
  }

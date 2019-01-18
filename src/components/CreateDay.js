@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TimeRange from './TimeRange'
+import CreateTimeRange from './CreateTimeRange'
 import moment from 'moment'
 import {fetchCreateTime} from '../adapters/index.js'
 
@@ -11,7 +11,8 @@ class CreateDay extends Component {
     this.state = {
       beginTime: new Date(this.props.day),
       endTime: new Date(this.props.day),
-      meeting_range_id: 0
+      meeting_range_id: 0,
+      interval: 0
     }
   }
 
@@ -26,19 +27,20 @@ class CreateDay extends Component {
             end_time: moment(this.state.endTime).utc().format()
           }
         })
+
     }
   }
 
   handleBeginTimeChange = (date) => {
     this.setState({
       beginTime: date
-    }, () => console.log(moment(this.state.beginTime).utc().format()))
+    })
   }
 
   handleEndTimeChange = (date) => {
     this.setState({
       endTime: date
-    }, () => console.log(this.state.endTime))
+    })
   }
 
   render() {
@@ -48,7 +50,7 @@ class CreateDay extends Component {
         <label value={this.props.day}>{moment(this.props.day).format('YYYY-MM-DD')}</label>
       </div>
       <div>
-        <TimeRange
+        <CreateTimeRange
         beginTime={this.state.beginTime}
         endTime={this.state.endTime}
         handleBeginTimeChange={this.handleBeginTimeChange}

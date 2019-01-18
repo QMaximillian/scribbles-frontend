@@ -17,12 +17,13 @@ class CreateRangeContainer extends Component {
       time: {
         beginDate: new Date(),
         endDate: new Date(),
-        intervals: 15
+        interval: 0
       },
       user: {
         first_name: '',
         last_name: '',
-        email: ''
+        email: '',
+        admin: ''
       }
     }
   }
@@ -56,7 +57,8 @@ class CreateRangeContainer extends Component {
 
   handleFetchPost = () => {
     fetchPostMeetingRange({meeting_range: {
-      begin_date: moment(this.state.time.beginDate).format(), end_date: moment(this.state.time.endDate).format()
+      begin_date: moment(this.state.time.beginDate).format(), end_date: moment(this.state.time.endDate).format(), interval: this.state.time.interval,
+      admin: true
     }})
     .then(resp => this.setState({
       meeting_range_id: resp.id
@@ -115,6 +117,20 @@ class CreateRangeContainer extends Component {
             onClick={() => this.handleFetchPost()}>
             Choose Times
           </button>
+          <div>
+            <select onChange={(e) => {
+              this.setState({
+                time: {
+                ...this.state.time,
+                interval: parseInt(e.target.value)
+              }}, () => console.log(this.state.time.interval))
+            }}>
+              <option value={15}>15</option>
+              <option value={30}>30</option>
+              <option value={45}>45</option>
+              <option value={60}>60</option>
+            </select>
+          </div>
 
         </div>
      )
