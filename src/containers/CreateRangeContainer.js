@@ -17,13 +17,14 @@ class CreateRangeContainer extends Component {
       time: {
         beginDate: new Date(),
         endDate: new Date(),
-        interval: 0
+        endPoll: new Date(),
+        interval: 0,
       },
       user: {
         first_name: '',
         last_name: '',
         email: '',
-        admin: ''
+        admin: '',
       }
     }
   }
@@ -43,7 +44,7 @@ class CreateRangeContainer extends Component {
         ...this.state.time,
         beginDate: date
       }
-    }, () => console.log(this.state.time.beginDate))
+    })
   }
 
   handleEndDatePicker = (date) => {
@@ -52,7 +53,16 @@ class CreateRangeContainer extends Component {
         ...this.state.time,
         endDate: date
       }
-    }, () => console.log(this.state.time))
+    })
+  }
+
+  handleEndPollPicker = (date) => {
+    this.setState({
+      time: {
+        ...this.state.time,
+        endPoll: date
+      }
+    }, () => console.log(this.state.time.endPoll))
   }
 
   handleFetchPost = () => {
@@ -112,7 +122,9 @@ class CreateRangeContainer extends Component {
             handleBeginDatePicker={this.handleBeginDatePicker}
             beginDate={this.state.time.beginDate}
             handleEndDatePicker={this.handleEndDatePicker}
-            endDate={this.state.time.endDate}/>
+            endDate={this.state.time.endDate}
+            endPoll={this.state.time.endPoll}
+            handleEndPollPicker={this.handleEndPollPicker}/>
           <button
             onClick={() => this.handleFetchPost()}>
             Choose Times

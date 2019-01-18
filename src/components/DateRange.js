@@ -6,14 +6,19 @@ import "react-datepicker/dist/react-datepicker.css"
 const DateRange = (props) => {
   return(
     <div>
-  <label> Begin </label>
+  <label> First Day </label>
       <DatePicker
        onChange={props.handleBeginDatePicker}
       selected={props.beginDate}/>
-  <label> End </label>
+  <label> Last Day </label>
       <DatePicker
        onChange={props.handleEndDatePicker}
       selected={props.endDate}/>
+
+  <label> End Poll </label>
+      <DatePicker
+       onChange={props.handleEndPollPicker}
+      selected={props.endPoll}/>
     </div>
   )
 }
