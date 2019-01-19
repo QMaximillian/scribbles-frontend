@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 const history = createBrowserHistory()

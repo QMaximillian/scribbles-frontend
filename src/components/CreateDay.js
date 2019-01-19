@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CreateTimeRange from './CreateTimeRange'
 import moment from 'moment'
 import {fetchCreateTime} from '../adapters/index.js'
-
+import { Jumbotron } from 'react-bootstrap'
 
 class CreateDay extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class CreateDay extends Component {
     return(
       <>
       <div>
-        <label value={this.props.day}>{moment(this.props.day).format('YYYY-MM-DD')}</label>
+        <label value={this.props.day}>{moment(this.props.day).format('LL')}</label>
       </div>
       <div>
         <CreateTimeRange

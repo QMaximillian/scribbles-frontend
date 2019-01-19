@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom'
 import moment from 'moment'
 import CreateDay from '../components/CreateDay'
 import { withRouter } from 'react-router'
+import { Jumbotron } from 'react-bootstrap'
 
 class CreateTimesContainer extends Component {
   constructor(props){
@@ -35,27 +36,32 @@ class CreateTimesContainer extends Component {
   handleFetches = () => {
     this.setState({
       fetch: !this.state.fetch
-    })
+    }, () => alert("Times Saved"))
   }
 
    render() {
      console.log(this.props)
      if (this.state.redirect) {
        return (
-         <Redirect to={"/meeting_range/" + this.props.location.state.meeting_range_id + "/add"
+         <Redirect to={"/meeting_range/" + this.props.location.state.meeting_range_id + "/admin"
           }/>
        )
      } else {
        return (
-         <>
+         <Jumbotron>
+         <div style={{textAlign: 'center'}}>
+          Set Time Ranges to Meet
+         </div>
           <div>
         {this.mapDays()}
           </div>
           <div>
+            {this.state.fetch ? <div></div> :
             <button onClick={() => this.handleFetches()}>Save Times</button>
-            <button onClick={() => this.setState({redirect: !this.state.redirect})}>Go To Meeting Container</button>
+            }
+          <button onClick={() => this.setState({redirect: !this.state.redirect})}>Go To Meeting Container</button>
           </div>
-        </>
+        </Jumbotron>
        )
      }
    }

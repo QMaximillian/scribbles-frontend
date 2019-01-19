@@ -14,11 +14,6 @@ const DateRange = (props) => {
       <DatePicker
        onChange={props.handleEndDatePicker}
       selected={props.endDate}/>
-
-  <label> End Poll </label>
-      <DatePicker
-       onChange={props.handleEndPollPicker}
-      selected={props.endPoll}/>
     </div>
   )
 }

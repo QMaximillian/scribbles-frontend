@@ -4,7 +4,7 @@ import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
-
+import { Jumbotron } from 'react-bootstrap'
 
 
 class CreateRangeContainer extends Component {
@@ -17,7 +17,6 @@ class CreateRangeContainer extends Component {
       time: {
         beginDate: new Date(),
         endDate: new Date(),
-        endPoll: new Date(),
         interval: 0,
       },
       user: {
@@ -56,19 +55,11 @@ class CreateRangeContainer extends Component {
     })
   }
 
-  handleEndPollPicker = (date) => {
-    this.setState({
-      time: {
-        ...this.state.time,
-        endPoll: date
-      }
-    }, () => console.log(this.state.time.endPoll))
-  }
-
   handleFetchPost = () => {
     fetchPostMeetingRange({meeting_range: {
-      begin_date: moment(this.state.time.beginDate).format(), end_date: moment(this.state.time.endDate).format(), interval: this.state.time.interval,
-      admin: true
+      begin_date: moment(this.state.time.beginDate).format(),
+      end_date: moment(this.state.time.endDate).format(),
+      interval: this.state.time.interval,
     }})
     .then(resp => this.setState({
       meeting_range_id: resp.id
@@ -88,13 +79,23 @@ class CreateRangeContainer extends Component {
     fetchCreateUser({user: {...this.state.user, meeting_range_id: this.state.meeting_range_id}})
   }
 
+  handleIntervalChange = (e) => {
+      this.setState({
+        time: {
+        ...this.state.time,
+        interval: parseInt(e.target.value)
+      }})
+    }
+
    render() {
      if (this.state.redirect) {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
      } else {
-       console.log({user: {...this.state.user, meeting_range_id: this.state.meeting_range_id}})
      return (
-        <div>
+        <Jumbotron>
+        <div style={{textAlign: 'center'}}>
+        <label>Create Your Meeting</label>
+        </div>
           <label>
             First Name
           </label>
@@ -122,29 +123,23 @@ class CreateRangeContainer extends Component {
             handleBeginDatePicker={this.handleBeginDatePicker}
             beginDate={this.state.time.beginDate}
             handleEndDatePicker={this.handleEndDatePicker}
-            endDate={this.state.time.endDate}
-            endPoll={this.state.time.endPoll}
-            handleEndPollPicker={this.handleEndPollPicker}/>
+            endDate={this.state.time.endDate}/>
+            <div>
+              Time Limit
+              <select onChange={this.handleIntervalChange}>
+                <option value={15}>15 min</option>
+                <option value={30}>30 min</option>
+                <option value={45}>45 min</option>
+                <option value={60}>60 min</option>
+              </select>
+            </div>
           <button
             onClick={() => this.handleFetchPost()}>
             Choose Times
           </button>
-          <div>
-            <select onChange={(e) => {
-              this.setState({
-                time: {
-                ...this.state.time,
-                interval: parseInt(e.target.value)
-              }}, () => console.log(this.state.time.interval))
-            }}>
-              <option value={15}>15</option>
-              <option value={30}>30</option>
-              <option value={45}>45</option>
-              <option value={60}>60</option>
-            </select>
-          </div>
 
-        </div>
+
+        </Jumbotron>
      )
    }
    }

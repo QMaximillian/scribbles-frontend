@@ -45,6 +45,22 @@ export const fetchUser = (id) => {
   return fetch('http://localhost:3001/users/' + id).then(resp => resp.json())
 }
 
+export const fetchCreateEndPoll = (body) => {
+  return fetch('http://localhost:3001/end_poll', {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify(body)
+  }).then(resp => resp.json())
+}
+
+export const fetchUpdateMeetingRange = (id, body) => {
+  return fetch('http://localhost:3001/meeting_ranges/' + id, {
+    method: "PUT",
+    headers: headers(),
+    body: JSON.stringify(body)
+  }).then(resp => resp.json())
+}
+
 export const headers = () => {
   return {
     'Content-Type': 'application/json',

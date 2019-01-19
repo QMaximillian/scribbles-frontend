@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { fetchUser, fetchMeetingRange } from '../adapters/index'
 import moment from 'moment'
 import Day from '../components/Day'
+import { Jumbotron } from 'react-bootstrap'
+
 
 export default class PresentationContainer extends Component {
   constructor(props) {
@@ -64,6 +66,8 @@ export default class PresentationContainer extends Component {
         if (meetingTime.day.toString() === meetingRange.slice(0, 10)) {
         return (
           <Day
+            creator={this.state.users[0].first_name}
+            joinedUsers={this.state.joinedUsers}
             canClick={this.state.canClick}
             meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
             interval={this.state.interval}/>
@@ -73,33 +77,26 @@ export default class PresentationContainer extends Component {
     })
   }
 
-  mappedJoinedUsers = () => {
-    return this.state.joinedUsers.map(user => {
-      return (<div>
-                {user.users.first_name}
-              </div>)
-    })
-  }
-
 
   // fetch to create new User
   // fetch to create new meetingTimes associated with User
   // ability to send link through email to people you want to participate
 
    render() {
-     console.log(this.state)
+     console.log(this.state.joinedUsers)
      if (this.state.users[0]) {
      return (
-       <>
+       <Jumbotron>
         <div>
-          {this.state.users[0].first_name}
+        <span>
+          {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
           <br/>
           {this.mappedMeetingRange()}
+        </span>
+        <span>
+        </span>
         </div>
-        <div>
-          {this.mappedJoinedUsers()}
-        </div>
-      </>
+      </Jumbotron>
      )
    } else {
      return <div>LOADING...</div>

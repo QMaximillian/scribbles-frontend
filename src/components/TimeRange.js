@@ -10,7 +10,7 @@ const TimeRange = (props) => {
     const getDateHoursMoment = () => {
 
       const { beginTime, endTime, interval } = props
-      // console.log(beginTime)
+
       let startTime = moment(beginTime)
       let stopTime = moment(endTime)
 
@@ -28,6 +28,11 @@ const TimeRange = (props) => {
   const mappedTimesAvailable = () => {
     return getDateHoursMoment().map(time => {
       return <Time
+            handleFinalDate={props.handleFinalDate}
+            finalChoice={props.finalChoice}
+            creator={props.creator}
+            joinedUsers={props.joinedUsers}
+            day={props.day}
             canClick={props.canClick}
             user_id={props.user_id}
             interval={props.interval}
@@ -36,18 +41,21 @@ const TimeRange = (props) => {
     })
   }
 
+
+
   return(
     <>
       <div>
         <span>
-        {moment(props.beginTime).format('hh:mm a')}
+        {/* moment(props.beginTime).format('hh:mm a') 8*/}
         </span>
         <div>
           {mappedTimesAvailable()}
         </div>
         <span>
-        {moment(props.endTime).format('hh:mm a')}
+        {/* moment(props.endTime).format('hh:mm a') 8*/}
         </span>
+
       </div>
     </>
   )

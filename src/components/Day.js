@@ -7,6 +7,11 @@ const Day = (props) => {
 
   const timeMap = () => {
     return <TimeRange
+    handleFinalDate={props.handleFinalDate}
+    finalChoice={props.finalChoice}
+    creator={props.creator}
+    day={props.day}
+    joinedUsers={props.joinedUsers}
     canClick={props.canClick}
     user_id={props.user_id}
     beginTime={props.meetingTime.begin_time}

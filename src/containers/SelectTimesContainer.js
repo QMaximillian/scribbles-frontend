@@ -4,6 +4,7 @@ import moment from 'moment'
 import Day from '../components/Day'
 import User from '../components/User'
 import { withRouter } from 'react-router-dom'
+import { Jumbotron } from 'react-bootstrap'
 
 class SelectTimesContainer extends Component {
 
@@ -35,8 +36,7 @@ class SelectTimesContainer extends Component {
         meetingRange: datesArray,
         users: resp.users,
         interval: resp.meeting_range.interval
-
-      }, () => console.log(this.state.interval))
+      })
     })
   }
 
@@ -100,19 +100,24 @@ class SelectTimesContainer extends Component {
      console.log(this.props)
      if (this.state.userCreate) {
        return (
+         <Jumbotron>
          <User handleChange={this.handleChange}
          handleUserCreate={this.handleUserCreate}/>
+         </Jumbotron>
        )
      } else {
 
      return (
-       <>
+       <Jumbotron>
         <div>
+        <div>
+        {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
+        </div>
           {this.mappedMeetingRange()}
         </div>
         <button onClick={this.handleFetchState}>{this.state.fetch ? 'Update' : 'Submit'} Times</button>
         {this.state.fetch ? <button onClick={() => this.handleMainPageRedirect()}>All Results</button> : <div></div>}
-        </>
+        </Jumbotron>
      )
    }
    }
