@@ -53,20 +53,22 @@ class SelectTimesContainer extends Component {
 
   mappedMeetingRange = () => {
     // Something other than map that doesn't return values if they do not match
-    return this.state.meetingRange.map(meetingRange => {
-      return this.state.meetingTimes.map(meetingTime => {
-        if (meetingTime.day.toString() === meetingRange.slice(0, 10)) {
-        return (
-          <Day
+    const { meetingTimes, meetingRange } = this.state
+    let dayArray = []
+    for (let range in meetingRange) {
+      for (let time in meetingTimes) {
+        if (meetingRange[range].slice(0, 10) === meetingTimes[time].day) {
+          dayArray.push(<Day
             canClick={this.state.canClick}
             user_id={this.state.user_id}
-            meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
+            meetingTime={meetingTimes[time]} day={moment(meetingRange[range]).format('LL')}
             interval={this.state.interval}
             fetch={this.state.fetch}/>
           )
         }
-      })
-    })
+      }
+    }
+    return dayArray
   }
 
   handleChange = (e) => {
