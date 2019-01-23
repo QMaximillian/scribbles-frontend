@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { fetchCreateEndPoll, fetchMeetingRange, fetchUpdateMeetingRange, fetchCreateInvitation, fetchUser } from '../adapters/index.js'
+import { fetchMeetingRange, fetchUpdateMeetingRange, fetchCreateInvitation, fetchUser } from '../adapters/index.js'
 import moment from 'moment'
 import Day from '../components/Day'
 import { Redirect } from 'react-router-dom'
@@ -69,25 +69,25 @@ export default class MeetingContainer extends Component {
     return dateArray;
   }
 
-  mappedMeetingRange = () => {
-    // Something other than map that doesn't return values if they do not match
-    return this.state.meetingRange.map(meetingRange => {
-      return this.state.meetingTimes.map(meetingTime => {
-        if (meetingTime.day === meetingRange.slice(0, 10)) {
-          console.log(meetingTime)
-        return (
-          <Day
-            handleFinalDate={this.handleFinalDate}
-            finalChoice={this.state.finalChoice}
-            creator={this.state.users[0].first_name}
-            joinedUsers={this.state.joinedUsers}
-            canClick={this.state.canClick}
-            meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
-            interval={this.state.interval}/>
-          )
+  meetingRangeLoop = () => {
+    const { meetingTimes, meetingRange } = this.state
+    let dayArray = []
+    for (let range in meetingRange) {
+      for (let time in meetingTimes) {
+        if (meetingRange[range].slice(0, 10) === meetingTimes[time].day) {
+          dayArray.push(<Day
+              handleFinalDate={this.handleFinalDate}
+              finalChoice={this.state.finalChoice}
+              creator={this.state.users[0].first_name}
+              joinedUsers={this.state.joinedUsers}
+              canClick={this.state.canClick}
+              meetingTime={meetingTimes[time]} day={moment(meetingRange[range]).format('LL')}
+              interval={this.state.interval}/>
+            )
         }
-      })
-    })
+      }
+      }
+      return dayArray
   }
 
 
@@ -150,7 +150,7 @@ export default class MeetingContainer extends Component {
             Choose the date and click "End Poll" to submit
           </div>
           <br/>
-          {this.mappedMeetingRange()}
+          {this.meetingRangeLoop()}
         </div>
         <div>
           <div>
@@ -169,7 +169,7 @@ export default class MeetingContainer extends Component {
       </Jumbotron>
      )
    } else {
-     return <div>{this.mappedMeetingRange()}</div>
+     return <div>{this.meetingRangeLoop()}</div>
    }
    }
  }
