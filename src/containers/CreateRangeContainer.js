@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
 import { Jumbotron } from 'react-bootstrap'
-
+import { connect } from 'react-redux'
 
 class CreateRangeContainer extends Component {
   constructor(props) {
@@ -88,6 +88,7 @@ class CreateRangeContainer extends Component {
     }
 
    render() {
+     console.log(this.props.createRangeContainer)
      if (this.state.redirect) {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
      } else {
@@ -137,12 +138,10 @@ class CreateRangeContainer extends Component {
             onClick={() => this.handleFetchPost()}>
             Choose Times
           </button>
-
-
         </Jumbotron>
      )
    }
    }
  }
 
- export default withRouter(CreateRangeContainer)
+ export default withRouter(connect(state => ({createRangeContainer: state.createRangeContainer }))(CreateRangeContainer))

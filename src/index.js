@@ -13,11 +13,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const history = createBrowserHistory()
 
-const rootReducer = scribbleReducer
-
 const composeEnhancers = window.__REDUX_DEVTOOL_EXTENSION_COMPOSE__ || compose
 
-const store = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(thunk)))
+const store = createStore(scribbleReducer, initialState, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>
