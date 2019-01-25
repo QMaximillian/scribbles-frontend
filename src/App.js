@@ -14,7 +14,7 @@ class App extends Component {
     return (
 
       <Switch>
-      <Route to="/home" render={(props) => < HomeContainer {...props}/>}/>
+      <Route path="/home" render={(props) => < HomeContainer {...props}/>}/>
       <Route exact path="/meeting_range/create/range" render={(props) => <CreateRangeContainer {...props}/>}/>
       <Route exact path="/meeting_range/create/times" render={(props) => <CreateTimesContainer {...props}/>}/>
       <Route exact path="/meeting_range/:id" render={(props) => <PresentationContainer {...props}/>}/>

@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
-import { Jumbotron } from 'react-bootstrap'
+import '../App.css'
 
-export default class HomeContainer extends Component {
+class HomeContainer extends Component {
    render() {
      return (
-        <Jumbotron>
-          <div style={{textAlign: 'center'}}>
+        <div className="home-grid">
+          <div className="top-bar">
           Welcome to Scribble
-          <div>
+          </div>
+          <i className="below-top-bar">Schedule a simple meeting with Scribble</i>
+          <div className="below-center">
           <button onClick={() => this.props.history.push('meeting_range/create/range')}>
             Create A Scribble
           </button>
           </div>
-          <i>Schedule a simple meeting with Scribble</i>
-          </div>
-        </Jumbotron>
+        </div>
+
+
      )
    }
  }
+
+ export default HomeContainer

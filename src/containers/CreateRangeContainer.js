@@ -68,7 +68,7 @@ class CreateRangeContainer extends Component {
       this.handleUserCreatePost()
       this.setState({
         redirect: !this.state.redirect,
-      })
+      }, () => console.log(this.state.redirect))
     })
 
 
