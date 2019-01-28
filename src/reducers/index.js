@@ -1,24 +1,22 @@
-export const initialState = {
+import {
+  CREATE_RANGE_FORM_TIME, CREATE_RANGE_FORM_USER, SET_RANGE, SET_TIMES } from '../actions/types'
 
-  createRangeContainer: {
-    meeting_range_id: 0,
-    redirect: false,
-    time: {
-      beginDate: new Date(),
-      endDate: new Date(),
-      interval: 0,
-    },
-    user: {
-      first_name: '',
-      last_name: '',
-      email: '',
-      admin: '',
-    }
-  }
+
+export const initialState = {
+  form: {
+  },
 }
 
-export const scribbleReducer = (state = initialState, action) => {
+export const rangeFormUserReducer = (state = initialState, action) => {
   switch(action.type) {
+
+    case CREATE_RANGE_FORM_USER:
+    return {
+       user: {
+        ...state,
+        first_name: action.payload.first_name
+      }
+    }
 
     default:
       return state

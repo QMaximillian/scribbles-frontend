@@ -4,18 +4,23 @@ import './index.css';
 import App from './App';
 import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
-import { scribbleReducer, initialState } from './reducers/index'
+import { rangeFormUserReducer, initialState } from './reducers/index'
 import { Provider } from 'react-redux'
-import { applyMiddleware, compose, createStore } from 'redux'
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.css';
+import { reducer as formReducer } from 'redux-form'
 
 
 const history = createBrowserHistory()
 
 const composeEnhancers = window.__REDUX_DEVTOOL_EXTENSION_COMPOSE__ || compose
 
-const store = createStore(scribbleReducer, initialState, composeEnhancers(applyMiddleware(thunk)))
+const rootReducer = combineReducers({
+  form: formReducer, rangeFormUserReducer: rangeFormUserReducer
+})
+
+const store = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>

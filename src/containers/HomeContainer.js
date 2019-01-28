@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Jumbotron } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export default class HomeContainer extends Component {
+class HomeContainer extends Component {
    render() {
      return (
         <Jumbotron>
@@ -18,3 +20,5 @@ export default class HomeContainer extends Component {
      )
    }
  }
+
+export default withRouter(connect()(HomeContainer))
