@@ -1,10 +1,15 @@
-import { CREATE_RANGE_FORM_TIME } from '../actions/types'
+import { SET_RANGE_INFORMATION } from '../actions/types'
 
-export const setBeginDate = (beginDate) => {
+export const setRangeInformation = ({ begin_date, end_date, interval, first_name, last_name, email }) => {
   return {
-    type: CREATE_RANGE_FORM_TIME,
+    type: SET_RANGE_INFORMATION,
     payload: {
-      beginDate: beginDate
+      begin_date,
+      end_date,
+      interval,
+      first_name,
+      last_name,
+      email
     }
   }
 }

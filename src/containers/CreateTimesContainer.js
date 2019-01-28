@@ -4,6 +4,7 @@ import moment from 'moment'
 import CreateDay from '../components/CreateDay'
 import { withRouter } from 'react-router'
 import { Jumbotron } from 'react-bootstrap'
+import { connect } from 'react-redux'
 
 class CreateTimesContainer extends Component {
   constructor(props){
@@ -40,7 +41,6 @@ class CreateTimesContainer extends Component {
   }
 
    render() {
-     console.log(this.props)
      if (this.state.redirect) {
        return (
          <Redirect to={"/meeting_range/" + this.props.location.state.meeting_range_id + "/admin"
@@ -67,4 +67,4 @@ class CreateTimesContainer extends Component {
    }
  }
 
- export default withRouter(CreateTimesContainer)
+ export default withRouter(connect()(CreateTimesContainer))

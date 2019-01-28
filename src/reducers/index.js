@@ -1,21 +1,24 @@
-import {
-  CREATE_RANGE_FORM_TIME, CREATE_RANGE_FORM_USER, SET_RANGE, SET_TIMES } from '../actions/types'
-
+import { SET_RANGE_INFORMATION } from '../actions/types'
 
 export const initialState = {
-  form: {
-  },
 }
 
-export const rangeFormUserReducer = (state = initialState, action) => {
+export const initialRangeState = {
+
+}
+
+export const createRangeReducer = (state = initialRangeState, action) => {
   switch(action.type) {
 
-    case CREATE_RANGE_FORM_USER:
+    case SET_RANGE_INFORMATION:
     return {
-       user: {
-        ...state,
-        first_name: action.payload.first_name
-      }
+      ...state,
+      begin_date: action.payload.begin_date,
+      end_date: action.payload.end_date,
+      interval: action.payload.interval,
+      first_name: action.payload.first_name,
+      last_name: action.payload.last_name,
+      email: action.payload.email
     }
 
     default:
