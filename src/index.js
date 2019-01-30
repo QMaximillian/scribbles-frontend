@@ -11,6 +11,7 @@ import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.css';
 
 
+
 const history = createBrowserHistory()
 
 const rootReducer = scribbleReducer
@@ -23,7 +24,7 @@ ReactDOM.render(
   <Provider store={store}>
   <div style={{backgroundColor: '#add8e6', height: '100vh'}}>
     <Router history={history}>
-      <App />
+        <App />
     </Router>
   </div>
   </Provider>, document.getElementById('root')
