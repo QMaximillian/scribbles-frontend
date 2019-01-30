@@ -39,6 +39,7 @@ class Time extends Component {
   }
 
   mappedMatch = () => {
+    console.log(this.props.joinedUsers)
     if (this.props.joinedUsers.length === 0){
       return
     }

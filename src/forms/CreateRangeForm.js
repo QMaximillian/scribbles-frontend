@@ -7,6 +7,7 @@ import { setRangeInformation } from '../actions/index'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+
 let CreateRangeForm = props => {
   const [redirect, setRedirect] = useState(false)
 
@@ -45,7 +46,6 @@ let CreateRangeForm = props => {
       <form onSubmit={handleSubmit(submit)}>
         <label>
           First Name
-          {console.log(redirect)}
         </label>
         <Field
         label="First Name"

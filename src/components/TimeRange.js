@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import Time from './Time'
 
+
 const TimeRange = (props) => {
 
   // onClick function that highlights choices that work
@@ -24,6 +25,7 @@ const TimeRange = (props) => {
     }
     return timeStops
   }
+
 
   const mappedTimesAvailable = () => {
     return getDateHoursMoment().map(time => {

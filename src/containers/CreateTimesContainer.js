@@ -41,6 +41,7 @@ class CreateTimesContainer extends Component {
   }
 
    render() {
+     console.log(this.props);
      if (this.state.redirect) {
        return (
          <Redirect to={"/meeting_range/" + this.props.location.state.meeting_range_id + "/admin"
@@ -53,7 +54,7 @@ class CreateTimesContainer extends Component {
           Set Time Ranges to Meet
          </div>
           <div>
-        {this.mapDays()}
+        {/*this.mapDays()*/}
           </div>
           <div>
             {this.state.fetch ? <div></div> :
@@ -67,4 +68,4 @@ class CreateTimesContainer extends Component {
    }
  }
 
- export default withRouter(connect()(CreateTimesContainer))
+ export default withRouter(connect(state => ({ begin_date: state.begin_date }))(CreateTimesContainer))
