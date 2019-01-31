@@ -33,7 +33,6 @@ class Time extends Component {
 
     if (this.props.handleFinalDate) {
     this.props.handleFinalDate(moment(this.props.time).format())
-    console.log(moment(this.props.time).format())
   }
 
   }
