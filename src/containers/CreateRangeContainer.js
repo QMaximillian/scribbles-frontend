@@ -19,12 +19,6 @@ class CreateRangeContainer extends Component {
         endDate: new Date(),
         interval: 0,
       },
-      user: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        admin: '',
-      }
     }
   }
 
@@ -96,29 +90,7 @@ class CreateRangeContainer extends Component {
         <div style={{textAlign: 'center'}}>
         <label>Create Your Meeting</label>
         </div>
-          <label>
-            First Name
-          </label>
-          <input onChange={this.handleNameChange}
-            value={this.state.user.first_name}
-            name="first_name">
-          </input>
-          <label>
-            Last Name
-          </label>
-          <input
-            onChange={this.handleNameChange}
-            value={this.state.user.last_name}
-            name="last_name">
-          </input>
-          <label>
-            Email
-          </label>
-          <input
-            onChange={this.handleNameChange}
-            value={this.state.user.email}
-            name="email">
-          </input>
+
 
             <div>
               Time Limit
