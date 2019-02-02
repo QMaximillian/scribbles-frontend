@@ -5,6 +5,8 @@ import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
 import { Jumbotron } from 'react-bootstrap'
+import ReturnRangeForm from '../forms/CreateRangeForm'
+
 
 
 class CreateRangeContainer extends Component {
@@ -93,50 +95,7 @@ class CreateRangeContainer extends Component {
      } else {
      return (
         <Jumbotron>
-        <div style={{textAlign: 'center'}}>
-        <label>Create Your Meeting</label>
-        </div>
-          <label>
-            First Name
-          </label>
-          <input onChange={this.handleNameChange}
-            value={this.state.user.first_name}
-            name="first_name">
-          </input>
-          <label>
-            Last Name
-          </label>
-          <input
-            onChange={this.handleNameChange}
-            value={this.state.user.last_name}
-            name="last_name">
-          </input>
-          <label>
-            Email
-          </label>
-          <input
-            onChange={this.handleNameChange}
-            value={this.state.user.email}
-            name="email">
-          </input>
-          <DateRange
-            handleBeginDatePicker={this.handleBeginDatePicker}
-            beginDate={this.state.time.beginDate}
-            handleEndDatePicker={this.handleEndDatePicker}
-            endDate={this.state.time.endDate}/>
-            <div>
-              Time Limit
-              <select onChange={this.handleIntervalChange}>
-                <option value={15}>15 min</option>
-                <option value={30}>30 min</option>
-                <option value={45}>45 min</option>
-                <option value={60}>60 min</option>
-              </select>
-            </div>
-          <button
-            onClick={() => this.handleFetchPost()}>
-            Choose Times
-          </button>
+        <ReturnRangeForm />
         </Jumbotron>
      )
    }

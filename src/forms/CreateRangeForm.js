@@ -94,4 +94,6 @@ CreateRangeForm = reduxForm({
   form: 'createRange'
 })(CreateRangeForm)
 
+
+
 export default withRouter(connect(null, ({ setRangeInformation }))(CreateRangeForm))
