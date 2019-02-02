@@ -10,7 +10,7 @@ class HomeContainer extends Component {
           </div>
           <i className="below-top-bar">Schedule a simple meeting with Scribble</i>
           <div className="below-center">
-          <button onClick={() => this.props.history.push('meeting_range/create/range')}>
+          <button onClick={() => this.props.history.push('/create/date_range')}>
             Create A Scribble
           </button>
           </div>

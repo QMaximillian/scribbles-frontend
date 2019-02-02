@@ -119,11 +119,7 @@ class CreateRangeContainer extends Component {
             value={this.state.user.email}
             name="email">
           </input>
-          <DateRange
-            handleBeginDatePicker={this.handleBeginDatePicker}
-            beginDate={this.state.time.beginDate}
-            handleEndDatePicker={this.handleEndDatePicker}
-            endDate={this.state.time.endDate}/>
+
             <div>
               Time Limit
               <select onChange={this.handleIntervalChange}>
@@ -137,8 +133,6 @@ class CreateRangeContainer extends Component {
             onClick={() => this.handleFetchPost()}>
             Choose Times
           </button>
-
-
         </Jumbotron>
      )
    }
