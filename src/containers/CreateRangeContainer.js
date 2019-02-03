@@ -12,15 +12,19 @@ import { state } from 'react-redux'
 
 
 const TimeRangeWeek = (props) => {
-
+  console.log(props.dates)
   const renderWeek = () => {
-    console.log(props.dates[props.activePage])
+    if (props.dates[props.activePage]) {
     return props.dates[props.activePage].map((date, i) => {
       return (
-        <span key={i} className={`time-range-day-${i + 1}`}>
+        <span
+          key={i} className={`time-range-day-${i + 1} time-range-day-border`}>
             {moment(date).format('LL')}
         </span>)
     })
+  } else {
+    return 'LOADING...'
+  }
   }
 
   return(
@@ -38,7 +42,7 @@ class CreateRangeContainer extends Component {
     this.state = {
       meeting_range_id: 0,
       redirect: false,
-      activePage: 2
+      activePage: 1
     }
   }
 
@@ -103,10 +107,20 @@ class CreateRangeContainer extends Component {
     //  pass object to TimeRangeWeek
   }
 
+  handlePaginationForward = () => {
+    this.setState({
+        activePage: this.state.activePage + 1
+    })
+  }
+
+  handlePaginationBackward = () => {
+    this.setState({
+        activePage: this.state.activePage - 1
+    })
+  }
 
 
    render() {
-     console.log(this.props.dateRange)
      if (this.state.redirect) {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
      } else {
@@ -115,12 +129,20 @@ class CreateRangeContainer extends Component {
         <div className="day-range-grid-item1">
         <label>
           Setup Times You're Available
-
         </label>
         </div>
+        <div className="time-range-pagination">
+          <button onClick={() => this.handlePaginationBackward()}>
+            ⟵
+          </button>
+          <button onClick={() => this.handlePaginationForward()}>
+            ⟶
+          </button>
+        </div>
+
           <TimeRangeWeek
           dates={this.props.dateRange} activePage={this.state.activePage}/>
-          <button
+          <button className="time-range-save"
             onClick={() => {}}>
             Save Times
           </button>

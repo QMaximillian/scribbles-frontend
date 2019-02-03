@@ -56,13 +56,12 @@ class CreateDateRangeContainer extends Component {
     if (dateArray.length < 7) {
     return {1: dateArray}
   } else {
-    return {1: dateArray.slice(0, 7), 2: dateArray.slice(7)}
+    return {1: dateArray.slice(0, 7), 2: dateArray.slice(7, 14)}
   }
 
   }
 
   handleSubmit = () => {
-
     this.props.setDateRange(this.getDates())
 
     this.setState({
