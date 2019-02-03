@@ -43,8 +43,27 @@ class CreateDateRangeContainer extends Component {
     })
   }
 
+  getDates = () => {
+    const { beginDate, endDate } = this.state.time
+    let dateArray = [];
+    let currentDate = beginDate
+    while (currentDate < endDate) {
+        dateArray.push(moment(currentDate).format())
+        currentDate = moment(currentDate).add(1, 'days');
+    }
+    dateArray.push(moment(endDate).format())
+
+    if (dateArray.length < 7) {
+    return {1: dateArray}
+  } else {
+    return {1: dateArray.slice(0, 7), 2: dateArray.slice(7)}
+  }
+
+  }
+
   handleSubmit = () => {
-    this.props.setDateRange([this.state.time.beginDate, this.state.time.endDate])
+
+    this.props.setDateRange(this.getDates())
 
     this.setState({
       redirect: true

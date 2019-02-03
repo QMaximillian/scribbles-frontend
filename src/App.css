@@ -3,7 +3,6 @@ div#root {
 }
 
 
-
 .home-grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -26,14 +25,6 @@ div#root {
   grid-column: 4 / span 3;
   grid-row: 1;
 }
-
-/* .time-range-grid {
-  display: grid;
-  grid-column: 2 / span 7;
-  grid-row: 2;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 1;
-} */
 
 .time-range-day-1 {
   grid-column: 2 / span 1;

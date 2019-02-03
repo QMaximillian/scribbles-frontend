@@ -14,11 +14,12 @@ import { state } from 'react-redux'
 const TimeRangeWeek = (props) => {
 
   const renderWeek = () => {
-    console.log(props.dates)
-    return props.dates.map((date, i) => {
-      return (<span className={`time-range-day-${i + 1}`}>
-                {moment(date).format('LL')}
-              </span>)
+    console.log(props.dates[props.activePage])
+    return props.dates[props.activePage].map((date, i) => {
+      return (
+        <span key={i} className={`time-range-day-${i + 1}`}>
+            {moment(date).format('LL')}
+        </span>)
     })
   }
 
@@ -37,11 +38,9 @@ class CreateRangeContainer extends Component {
     this.state = {
       meeting_range_id: 0,
       redirect: false,
-      week: [],
+      activePage: 2
     }
   }
-
-
 
   handleBeginDatePicker = (date) => {
     this.setState({
@@ -90,13 +89,21 @@ class CreateRangeContainer extends Component {
       }})
     }
 
+
   setupDates = () => {
-    
+
+
+
+
+
+
     // find dates in between the two dates given
     // push every 7 dates into a object with an index key
     // push them into an object with as {1: [// first 7 dates]}
     //  pass object to TimeRangeWeek
   }
+
+
 
    render() {
      console.log(this.props.dateRange)
@@ -108,9 +115,11 @@ class CreateRangeContainer extends Component {
         <div className="day-range-grid-item1">
         <label>
           Setup Times You're Available
+
         </label>
         </div>
-          <TimeRangeWeek dates={this.props.dateRange}/>
+          <TimeRangeWeek
+          dates={this.props.dateRange} activePage={this.state.activePage}/>
           <button
             onClick={() => {}}>
             Save Times
