@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import moment from 'moment'
 import CreateDay from '../components/CreateDay'
 import { withRouter } from 'react-router'
-import { Jumbotron } from 'react-bootstrap'
+
 
 class CreateTimesContainer extends Component {
   constructor(props){
@@ -48,7 +48,7 @@ class CreateTimesContainer extends Component {
        )
      } else {
        return (
-         <Jumbotron>
+         <div>
          <div style={{textAlign: 'center'}}>
           Set Time Ranges to Meet
          </div>
@@ -61,7 +61,7 @@ class CreateTimesContainer extends Component {
             }
           <button onClick={() => this.setState({redirect: !this.state.redirect})}>Go To Meeting Container</button>
           </div>
-        </Jumbotron>
+        </div>
        )
      }
    }

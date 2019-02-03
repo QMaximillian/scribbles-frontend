@@ -1,10 +1,10 @@
-import { SET_DATE_RANGE } from '../actions/types'
-import { SET_USER_INFORMATION } from '../actions/types'
+import { SET_DATE_RANGE, SET_USER_INFORMATION } from '../actions/types'
+
+
 
 export const initialState = {
-  current: {},
-  dateRange: [],
-  userInformation: {}
+    dateRange: [],
+    userInformation: {}
 }
 
 export const scribbleReducer = (state = initialState, action) => {
@@ -19,10 +19,11 @@ export const scribbleReducer = (state = initialState, action) => {
   case SET_USER_INFORMATION:
   return {
     ...state,
-    userInformation: action.payload.userInformation
-  }
+    userInformation:  action.payload.userInformation
+    }
 
     default:
       return state
   }
+
 }

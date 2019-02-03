@@ -16,16 +16,15 @@ const history = createBrowserHistory()
 
 const rootReducer = scribbleReducer
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(thunk)))
 
+
 ReactDOM.render(
   <Provider store={store}>
-  <div style={{backgroundColor: '#add8e6', height: '100vh'}}>
     <Router history={history}>
         <App />
     </Router>
-  </div>
   </Provider>, document.getElementById('root')
 )

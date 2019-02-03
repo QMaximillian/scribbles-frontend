@@ -13,7 +13,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-
+      <div>
       <Switch>
       <Route path="/home" render={(props) => <HomeContainer {...props}/>}/>
       <Route path="/create/date_range" render={(props) => <CreateDateRangeContainer/>}/>
@@ -24,6 +24,7 @@ class App extends Component {
       <Route exact path="/meeting_range/:id/add" render={(props) => <SelectTimesContainer {...props}/>}/>
       <Route exact path="/meeting_range/:id/confirmed" render={(props) => <ConfirmedDate {...props}/>}/>
       </Switch>
+      </div>
 
     )
   }

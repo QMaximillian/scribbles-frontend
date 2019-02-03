@@ -3,7 +3,7 @@ import { fetchMeetingRange, fetchUpdateMeetingRange, fetchCreateInvitation, fetc
 import moment from 'moment'
 import Day from '../components/Day'
 import { Redirect } from 'react-router-dom'
-import { Jumbotron } from 'react-bootstrap'
+
 
 export default class MeetingContainer extends Component {
 
@@ -143,7 +143,7 @@ export default class MeetingContainer extends Component {
 
      if (this.state.user_ids[0]) {
      return (
-       <Jumbotron>
+       <div>
         <div>
           {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
           <div style={{textAlign: 'center'}}>
@@ -166,7 +166,7 @@ export default class MeetingContainer extends Component {
         <div>
 
         </div>
-      </Jumbotron>
+      </div>
      )
    } else {
      return <div>{this.meetingRangeLoop()}</div>

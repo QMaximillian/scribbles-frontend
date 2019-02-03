@@ -1,10 +1,10 @@
 import React from 'react'
 import moment from 'moment'
-import { Jumbotron } from 'react-bootstrap'
+
 
 const ConfirmedDate = (props) => {
   return(
-    <Jumbotron style={{textAlign: 'center'}}>
+      <div>
       <div>
         Confirmed Meeting Date
       </div>
@@ -13,8 +13,8 @@ const ConfirmedDate = (props) => {
       {moment(props.location.state.finalDate).format('hh:mm a')} -
       {moment(props.location.state.finalDate).add(props.location.state.interval, 'minutes').format('hh:mm a')}
       </div>
+      </div>
 
-    </Jumbotron>
   )
 }
 

@@ -4,7 +4,8 @@ import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
-import { Jumbotron } from 'react-bootstrap'
+
+import { connect } from 'react-redux'
 
 
 class CreateRangeContainer extends Component {
@@ -22,14 +23,7 @@ class CreateRangeContainer extends Component {
     }
   }
 
-  handleNameChange = (e) => {
-    this.setState({
-      user: {
-        ...this.state.user,
-        [e.target.name]: e.target.value
-      }
-    })
-  }
+
 
   handleBeginDatePicker = (date) => {
     this.setState({
@@ -86,12 +80,10 @@ class CreateRangeContainer extends Component {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
      } else {
      return (
-        <Jumbotron>
+        <div>
         <div style={{textAlign: 'center'}}>
         <label>Create Your Meeting</label>
         </div>
-
-
             <div>
               Time Limit
               <select onChange={this.handleIntervalChange}>
@@ -105,10 +97,10 @@ class CreateRangeContainer extends Component {
             onClick={() => this.handleFetchPost()}>
             Choose Times
           </button>
-        </Jumbotron>
+        </div>
      )
    }
    }
  }
 
- export default withRouter(CreateRangeContainer)
+ export default withRouter(connect(state => ({dateRange: state.dateRange, userInformation: state.userInformation}))(CreateRangeContainer))
