@@ -1,10 +1,33 @@
 import React, { Component } from 'react'
 import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
+// import TimeRangeWeek from '../components/TimeRangeWeek'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import '../App.css'
+import { store } from '../index.js'
+import { state } from 'react-redux'
+
+
+
+const TimeRangeWeek = (props) => {
+
+  const renderWeek = () => {
+    console.log(props.dates)
+    return props.dates.map((date, i) => {
+      return (<span className={`time-range-day-${i + 1}`}>
+                {moment(date).format('LL')}
+              </span>)
+    })
+  }
+
+  return(
+    <>
+      {renderWeek()}
+    </>
+  )
+}
 
 
 class CreateRangeContainer extends Component {
@@ -14,11 +37,7 @@ class CreateRangeContainer extends Component {
     this.state = {
       meeting_range_id: 0,
       redirect: false,
-      time: {
-        beginDate: new Date(),
-        endDate: new Date(),
-        interval: 0,
-      },
+      week: [],
     }
   }
 
@@ -57,9 +76,6 @@ class CreateRangeContainer extends Component {
         redirect: !this.state.redirect,
       }, () => console.log(this.state.redirect))
     })
-
-
-
   }
 
   handleUserCreatePost = () => {
@@ -74,31 +90,33 @@ class CreateRangeContainer extends Component {
       }})
     }
 
+  setupDates = () => {
+    
+    // find dates in between the two dates given
+    // push every 7 dates into a object with an index key
+    // push them into an object with as {1: [// first 7 dates]}
+    //  pass object to TimeRangeWeek
+  }
+
    render() {
+     console.log(this.props.dateRange)
      if (this.state.redirect) {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
      } else {
      return (
-        <div className="time-range-grid">
-        <div className="time-range-grid-item1">
+        <div className="day-range-grid">
+        <div className="day-range-grid-item1">
         <label>
           Setup Times You're Available
         </label>
-            <div>
-              Time Limit
-              <select onChange={this.handleIntervalChange}>
-                <option value={15}>15 min</option>
-                <option value={30}>30 min</option>
-                <option value={45}>45 min</option>
-                <option value={60}>60 min</option>
-              </select>
-            </div>
+        </div>
+          <TimeRangeWeek dates={this.props.dateRange}/>
           <button
-            onClick={() => this.handleFetchPost()}>
-            Choose Times
+            onClick={() => {}}>
+            Save Times
           </button>
         </div>
-        </div>
+
      )
    }
    }

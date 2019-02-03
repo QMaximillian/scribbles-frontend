@@ -5,6 +5,8 @@ import DatePicker from 'react-datepicker'
 import { setDateRange } from '../actions/index'
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router'
+import 'react-datepicker/dist/react-datepicker.css'
+
 import '../App.css'
 
 class CreateDateRangeContainer extends Component {
@@ -15,8 +17,8 @@ class CreateDateRangeContainer extends Component {
       meeting_range_id: 0,
       redirect: false,
       time: {
-        beginDate: moment().format(),
-        endDate: moment().format(),
+        beginDate: moment().toDate(),
+        endDate: moment().toDate(),
         interval: 0,
       }
     }
@@ -65,7 +67,7 @@ class CreateDateRangeContainer extends Component {
                 First Day
               </label><br />
                 <DatePicker
-                  minDate={moment().format()}
+                  minDate={moment().toDate()}
                  onChange={this.handleBeginDatePicker}
                  selected={this.state.time.beginDate}/>
             </div>
@@ -75,7 +77,7 @@ class CreateDateRangeContainer extends Component {
               </label><br />
                 <DatePicker
                   className=''
-                  minDate={moment().format()}
+                  minDate={moment().toDate()}
                  onChange={this.handleEndDatePicker}
                  selected={this.state.time.endDate}/>
             </div>

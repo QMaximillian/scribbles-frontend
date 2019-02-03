@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import 'bootstrap/dist/css/bootstrap.css';
-
+import { loadState, saveState } from './localStorage'
 
 
 const history = createBrowserHistory()
@@ -18,7 +18,12 @@ const rootReducer = scribbleReducer
 
  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(thunk)))
+const persistedState = loadState()
+export const store = createStore(rootReducer, persistedState, composeEnhancers(applyMiddleware(thunk)))
+
+store.subscribe(() => {
+  saveState(store.getState())
+})
 
 
 ReactDOM.render(
