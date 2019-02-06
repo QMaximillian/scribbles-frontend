@@ -21,6 +21,7 @@ export const fetchCreateUser = (body) => {
     body: JSON.stringify(body)
   }).then(resp => resp.json())
 }
+
 export const fetchMeetingRange = (id) => {
   return fetch(`http://localhost:3001/meeting_ranges/${id}`).then(resp => resp.json())
 }
@@ -64,6 +65,6 @@ export const fetchUpdateMeetingRange = (id, body) => {
 export const headers = () => {
   return {
     'Content-Type': 'application/json',
-    Accept: "application/json",
+    'Accept': "application/json",
   }
 }
