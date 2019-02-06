@@ -4,7 +4,7 @@ import moment from 'moment'
 import Day from '../components/Day'
 import User from '../components/User'
 import { withRouter } from 'react-router-dom'
-import { Jumbotron } from 'react-bootstrap'
+
 
 class SelectTimesContainer extends Component {
 
@@ -102,15 +102,15 @@ class SelectTimesContainer extends Component {
      console.log(this.props)
      if (this.state.userCreate) {
        return (
-         <Jumbotron>
+         <div>
          <User handleChange={this.handleChange}
          handleUserCreate={this.handleUserCreate}/>
-         </Jumbotron>
+         </div>
        )
      } else {
 
      return (
-       <Jumbotron>
+       <div>
         <div>
         <div>
         {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
@@ -119,7 +119,7 @@ class SelectTimesContainer extends Component {
         </div>
         <button onClick={this.handleFetchState}>{this.state.fetch ? 'Update' : 'Submit'} Times</button>
         {this.state.fetch ? <button onClick={() => this.handleMainPageRedirect()}>All Results</button> : <div></div>}
-        </Jumbotron>
+        </div>
      )
    }
    }

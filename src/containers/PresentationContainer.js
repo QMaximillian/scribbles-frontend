@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { fetchUser, fetchMeetingRange } from '../adapters/index'
 import moment from 'moment'
 import Day from '../components/Day'
-import { Jumbotron } from 'react-bootstrap'
+
 
 
 export default class PresentationContainer extends Component {
@@ -89,7 +89,7 @@ export default class PresentationContainer extends Component {
      console.log(this.state.joinedUsers)
      if (this.state.users[0]) {
      return (
-       <Jumbotron>
+       <div>
         <div>
         <span>
           {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
@@ -99,7 +99,7 @@ export default class PresentationContainer extends Component {
         <span>
         </span>
         </div>
-      </Jumbotron>
+      </div>
      )
    } else {
      return <div>LOADING...</div>

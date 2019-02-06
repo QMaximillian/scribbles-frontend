@@ -4,7 +4,7 @@ import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
-import { Jumbotron } from 'react-bootstrap'
+
 
 
 class CreateRangeContainer extends Component {
@@ -92,10 +92,12 @@ class CreateRangeContainer extends Component {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
      } else {
      return (
-        <Jumbotron>
+       <div>
         <div style={{textAlign: 'center'}}>
-        <label>Create Your Meeting</label>
+        <label>Create Your Meeting
+        </label>
         </div>
+        <div>
           <label>
             First Name
           </label>
@@ -137,9 +139,8 @@ class CreateRangeContainer extends Component {
             onClick={() => this.handleFetchPost()}>
             Choose Times
           </button>
-
-
-        </Jumbotron>
+          </div>
+          </div>
      )
    }
    }
