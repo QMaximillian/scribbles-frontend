@@ -44,6 +44,7 @@ class CreateDateRangeContainer extends Component {
   }
 
   getDates = () => {
+    // Fix dates to return with midnight times
     const { beginDate, endDate } = this.state.time
     let dateArray = [];
     let currentDate = beginDate

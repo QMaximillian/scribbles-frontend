@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
-// import TimeRangeWeek from '../components/TimeRangeWeek'
+import TimeRangeV2 from '../components/TimeRangeV2'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
@@ -18,15 +18,19 @@ const TimeRangeWeek = (props) => {
     return props.dates[props.activePage].map((date, i) => {
       return (
         <span
-          key={i} className={`time-range-day-${i + 1} time-range-day-border`}>
+          key={i}
+          className={`time-range-day-${i + 1} time-range-day-border`}>
             {moment(date).format('LL')}
+            <span>
+              <TimeRangeV2 date={date} />
+            </span>
         </span>)
     })
   } else {
     return 'LOADING...'
   }
   }
-
+  
   return(
     <>
       {renderWeek()}
