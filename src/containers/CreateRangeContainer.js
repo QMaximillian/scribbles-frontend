@@ -92,54 +92,70 @@ class CreateRangeContainer extends Component {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
      } else {
      return (
-       <div>
-        <div style={{textAlign: 'center'}}>
-        <label>Create Your Meeting
-        </label>
+       <div className="create-range-container">
+        <div className="create-range-banner">
+          Create Your Meeting
         </div>
-        <div>
-          <label>
+        <div className="create-range-first-name">
+          <div className="create-range-first-name-label">
             First Name
-          </label>
+          </div>
+          <div>
           <input onChange={this.handleNameChange}
             value={this.state.user.first_name}
             name="first_name">
           </input>
-          <label>
-            Last Name
-          </label>
-          <input
-            onChange={this.handleNameChange}
-            value={this.state.user.last_name}
-            name="last_name">
-          </input>
-          <label>
+          </div>
+        </div>
+        <div>
+            <div className="create-range-last-name">
+              Last Name
+            </div>
+            <div className="create-range-last-name-input">
+            <input
+              onChange={this.handleNameChange}
+              value={this.state.user.last_name}
+              name="last_name">
+            </input>
+            </div>
+          </div>
+
+        <div>
+          <div>
             Email
-          </label>
-          <input
-            onChange={this.handleNameChange}
-            value={this.state.user.email}
-            name="email">
-          </input>
+          </div>
+          <div>
+            <input
+              onChange={this.handleNameChange}
+              value={this.state.user.email}
+              name="email">
+            </input>
+          </div>
+        </div>
           <DateRange
             handleBeginDatePicker={this.handleBeginDatePicker}
             beginDate={this.state.time.beginDate}
             handleEndDatePicker={this.handleEndDatePicker}
             endDate={this.state.time.endDate}/>
-            <div>
-              Time Limit
+            <div className="create-range-time-limit">
+              <div>
+                Time Limit
+              </div>
+              <div>
               <select onChange={this.handleIntervalChange}>
                 <option value={15}>15 min</option>
                 <option value={30}>30 min</option>
                 <option value={45}>45 min</option>
                 <option value={60}>60 min</option>
               </select>
+              </div>
             </div>
-          <button
-            onClick={() => this.handleFetchPost()}>
-            Choose Times
-          </button>
-          </div>
+            <div className="create-range-time-button">
+              <button
+                onClick={() => this.handleFetchPost()}>
+                Choose Times
+              </button>
+            </div>
           </div>
      )
    }

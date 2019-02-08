@@ -22,7 +22,7 @@ const store = createStore(rootReducer, initialState, composeEnhancers(applyMiddl
 
 ReactDOM.render(
   <Provider store={store}>
-  <div style={{backgroundColor: '#add8e6', height: '100vh'}}>
+  <div>
     <Router history={history}>
         <App />
     </Router>

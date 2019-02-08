@@ -7,12 +7,14 @@ import MeetingContainer from './containers/MeetingContainer'
 import SelectTimesContainer from './containers/SelectTimesContainer'
 import PresentationContainer from './containers/PresentationContainer'
 import ConfirmedDate from './components/ConfirmedDate'
+import Navbar from './components/Navbar'
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-
+      <div className="home-grid">
+      <Navbar />
       <Switch>
       <Route path="/home" render={(props) => <HomeContainer {...props}/>}/>
       <Route exact path="/meeting_range/create/range" render={(props) => <CreateRangeContainer {...props}/>}/>
@@ -22,6 +24,7 @@ class App extends Component {
       <Route exact path="/meeting_range/:id/add" render={(props) => <SelectTimesContainer {...props}/>}/>
       <Route exact path="/meeting_range/:id/confirmed" render={(props) => <ConfirmedDate {...props}/>}/>
       </Switch>
+      </div>
 
     )
   }

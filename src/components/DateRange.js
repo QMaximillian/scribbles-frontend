@@ -1,20 +1,35 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+import '../App.css'
 
 
 const DateRange = (props) => {
   return(
-    <div>
-  <label> First Day </label>
+    <>
+    <div className="create-range-first-day">
+      <div>
+        First Day
+      </div>
+      <div>
       <DatePicker
-       onChange={props.handleBeginDatePicker}
-      selected={props.beginDate}/>
-  <label> Last Day </label>
-      <DatePicker
-       onChange={props.handleEndDatePicker}
-      selected={props.endDate}/>
-    </div>
+          minDate={new Date()}
+          onChange={props.handleBeginDatePicker}
+          selected={props.beginDate}/>
+      </div>
+      </div>
+      <div className="create-range-last-day">
+        <div>
+          Last Day
+        </div>
+        <div>
+        <DatePicker
+          minDate={new Date()}
+          onChange={props.handleEndDatePicker}
+          selected={props.endDate}/>
+        </div>
+      </div>
+    </>
   )
 }
 
