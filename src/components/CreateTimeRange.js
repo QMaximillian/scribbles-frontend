@@ -11,15 +11,16 @@ const CreateTimeRange = (props) => {
         onChange={props.handleBeginTimeChange}
         selected={props.beginTime}
         dateFormat="h:mm aa"
-        placeholderText="Choose a time"
-        />
+        placeholderText="Click to select a date"
+/>
+
         <DatePicker
         showTimeSelect
         showTimeSelectOnly
         onChange={props.handleEndTimeChange}
         selected={props.endTime}
         dateFormat="h:mm aa"
-        placeholderText="Choose a time"
+        placeholderText="Click to select a date"
         />
       </>
   )

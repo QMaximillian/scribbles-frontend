@@ -25,7 +25,6 @@ class App extends Component {
       <Route exact path="/meeting_range/:id/confirmed" render={(props) => <ConfirmedDate {...props}/>}/>
       </Switch>
       </div>
-
     )
   }
 }

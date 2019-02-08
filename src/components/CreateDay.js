@@ -8,8 +8,8 @@ class CreateDay extends Component {
     super(props)
 
     this.state = {
-      beginTime: new Date(this.props.day),
-      endTime: new Date(this.props.day),
+      beginTime: moment(this.props.day).set({h: '09', m: '00', s: '00'}).toDate(),
+      endTime: moment(this.props.day).set({h: '17', m: '00', s: '00'}).toDate(),
       meeting_range_id: 0,
       interval: 0
     }

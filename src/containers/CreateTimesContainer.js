@@ -23,12 +23,13 @@ class CreateTimesContainer extends Component {
         dateArray.push(moment(currentDate).format())
         currentDate = moment(currentDate).add(1, 'days');
     }
+
     return dateArray;
   }
 
 
   mapDays = () => {
-    return this.getDates(new Date(this.props.location.state.beginDate), new Date(this.props.location.state.endDate)).map(day => {
+    return this.getDates(this.props.location.state.beginDate, this.props.location.state.endDate).map(day => {
       return <CreateDay day={day} fetch={this.state.fetch} meeting_range_id={this.props.location.state.meeting_range_id}/>
     })
   }
@@ -40,7 +41,7 @@ class CreateTimesContainer extends Component {
   }
 
    render() {
-     console.log(this.props)
+     console.log( this.props.location.state.beginDate)
      if (this.state.redirect) {
        return (
          <Redirect to={"/meeting_range/" + this.props.location.state.meeting_range_id + "/admin"
@@ -48,8 +49,8 @@ class CreateTimesContainer extends Component {
        )
      } else {
        return (
+         <div className="create-time-container border">
          <div>
-         <div style={{textAlign: 'center'}}>
           Set Time Ranges to Meet
          </div>
           <div>

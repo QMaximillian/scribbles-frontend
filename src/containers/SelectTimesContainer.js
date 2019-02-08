@@ -57,7 +57,7 @@ class SelectTimesContainer extends Component {
     let dayArray = []
     for (let range in meetingRange) {
       for (let time in meetingTimes) {
-        if (meetingRange[range].slice(0, 10) === meetingTimes[time].day) {
+        if (meetingRange[range].slice(0, 10) === meetingTimes[time].day.slice(0, 10)) {
           dayArray.push(<Day
             canClick={this.state.canClick}
             user_id={this.state.user_id}
