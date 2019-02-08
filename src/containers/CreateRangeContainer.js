@@ -92,12 +92,12 @@ class CreateRangeContainer extends Component {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
      } else {
      return (
-       <div className="create-range-container">
+       <div className="create-range-container border">
         <div className="create-range-banner">
           Create Your Meeting
         </div>
         <div className="create-range-first-name">
-          <div className="create-range-first-name-label">
+          <div>
             First Name
           </div>
           <div>
@@ -107,8 +107,8 @@ class CreateRangeContainer extends Component {
           </input>
           </div>
         </div>
-        <div>
-            <div className="create-range-last-name">
+        <div className="create-range-last-name">
+            <div>
               Last Name
             </div>
             <div className="create-range-last-name-input">
@@ -142,7 +142,9 @@ class CreateRangeContainer extends Component {
                 Time Limit
               </div>
               <div>
-              <select onChange={this.handleIntervalChange}>
+              <select
+              style={{width: '180px'}}
+               onChange={this.handleIntervalChange}>
                 <option value={15}>15 min</option>
                 <option value={30}>30 min</option>
                 <option value={45}>45 min</option>
