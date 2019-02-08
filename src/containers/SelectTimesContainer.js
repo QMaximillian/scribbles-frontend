@@ -108,19 +108,18 @@ class SelectTimesContainer extends Component {
          </div>
        )
      } else {
-
-     return (
-       <div>
-        <div>
-        <div>
-        {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
-        </div>
-          {this.mappedMeetingRange()}
-        </div>
-        <button onClick={this.handleFetchState}>{this.state.fetch ? 'Update' : 'Submit'} Times</button>
-        {this.state.fetch ? <button onClick={() => this.handleMainPageRedirect()}>All Results</button> : <div></div>}
-        </div>
-     )
+         return (
+           <div className="day-range-grid">
+            <div>
+            {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
+            </div>
+            <div>
+              {this.mappedMeetingRange()}
+            </div>
+            <button onClick={this.handleFetchState}>{this.state.fetch ? 'Update' : 'Submit'} Times</button>
+            {this.state.fetch ? <button onClick={() => this.handleMainPageRedirect()}>All Results</button> : <div></div>}
+          </div>
+         )
    }
    }
  }

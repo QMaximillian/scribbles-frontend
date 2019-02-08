@@ -76,12 +76,15 @@ export default class MeetingContainer extends Component {
     console.log(meetingTimes)
     console.log(meetingRange)
     let dayArray = []
-    for (let range in meetingRange) {
-      for (let time in meetingTimes) {
+    for (let range of meetingRange) {
+      for (let time of meetingTimes) {
+        let i = 1
         console.log(meetingRange[range].slice(0, 10))
         console.log(meetingTimes[time].day.slice(0, 10))
         if (meetingRange[range].slice(0, 10) === meetingTimes[time].day.slice(0, 10)) {
-          dayArray.push(<Day
+          dayArray.push(
+            <div className={`day-range-item-${i}`}>
+            <Day
               handleFinalDate={this.handleFinalDate}
               finalChoice={this.state.finalChoice}
               creator={this.state.users[0].first_name}
@@ -89,7 +92,11 @@ export default class MeetingContainer extends Component {
               canClick={this.state.canClick}
               meetingTime={meetingTimes[time]} day={moment(meetingRange[range]).format('LL')}
               interval={this.state.interval}/>
+            </div>
             )
+
+            i++
+            console.log(i)
         }
       }
       }

@@ -22,10 +22,10 @@ const Day = (props) => {
   }
 
   return(
-    <span>
+    <>
       {props.day}
       {timeMap()}
-    </span>
+    </>
 
   )
 }

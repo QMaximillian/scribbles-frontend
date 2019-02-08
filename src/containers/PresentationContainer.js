@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { fetchUser, fetchMeetingRange } from '../adapters/index'
 import moment from 'moment'
+import DayV2 from '../components/DayV2'
 import Day from '../components/Day'
 
 
@@ -65,18 +66,22 @@ export default class PresentationContainer extends Component {
     let dayArray = []
     for (let range in meetingRange) {
       for (let time in meetingTimes) {
+        console.log(range)
         if (meetingRange[range].slice(0, 10) === meetingTimes[time].day.slice(0, 10)) {
           dayArray.push(
+        <div className={`day-range-item-${range + 1}`}>
           <Day
             creator={this.state.users[0].first_name}
             joinedUsers={this.state.joinedUsers}
             canClick={this.state.canClick}
             meetingTime={meetingTimes[time]} day={moment(meetingRange[range]).format('LL')}
             interval={this.state.interval}/>
+          </div>
           )
         }
       }
     }
+    console.log(dayArray)
     return dayArray
   }
 
@@ -89,17 +94,15 @@ export default class PresentationContainer extends Component {
      console.log(this.state.joinedUsers)
      if (this.state.users[0]) {
      return (
-       <div>
+
+        <div className="day-range-grid">
         <div>
-        <span>
           {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
-          <br/>
-          {this.mappedMeetingRange()}
-        </span>
-        <span>
-        </span>
         </div>
-      </div>
+        <div>
+          {this.mappedMeetingRange()}
+        </div>
+        </div>
      )
    } else {
      return <div>LOADING...</div>

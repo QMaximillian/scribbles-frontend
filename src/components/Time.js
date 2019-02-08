@@ -59,8 +59,9 @@ class Time extends Component {
 
     if (this.props.canClick) {
     return(
-      <div onClick={this.handleToggle}>
-      <div style={{backgroundColor: `${this.state.toggleOn ? 'green' : '#e6e9ec'}`}}>
+      <div
+        onClick={this.handleToggle}
+        style={{backgroundColor: `${this.state.toggleOn ? 'green' : '#e6e9ec'}`}}>
       <span>
       {moment(this.props.time).format("hh:mm a")} -
       </span>
@@ -68,12 +69,13 @@ class Time extends Component {
       {moment(this.props.time).add(this.props.interval, 'minutes').format("hh:mm a")}
       </span>
       </div>
-      </div>
+
     )
   } else if (this.props.finalChoice) {
     return(
-      <div onClick={this.handleToggle}>
-      <div style={{backgroundColor: `${this.state.toggleOn ? 'orange' : '#e6e9ec'}`}}>
+      <div
+        onClick={this.handleToggle}
+        style={{backgroundColor: `${this.state.toggleOn ? 'orange' : '#e6e9ec'}`}}>
       <span>
       {moment(this.props.time).format("hh:mm a")} -
       </span>
@@ -82,11 +84,10 @@ class Time extends Component {
       </span>
       {this.mappedMatch()}
       </div>
-      </div>
+
     )
   } else {
     return(
-      <div>
       <div style={{backgroundColor: '#e6e9ec'}}>
       <span>
       {moment(this.props.time).format("hh:mm a")} -
@@ -95,7 +96,6 @@ class Time extends Component {
       {moment(this.props.time).add(this.props.interval, 'minutes').format("hh:mm a")}
       </span>
       {this.mappedMatch()}
-      </div>
       </div>
     )
   }

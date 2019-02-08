@@ -3,7 +3,7 @@ import React from 'react'
 
 const User = (props) => {
   return(
-    <div>
+    <>
       <input
        onChange={props.handleChange}
        name="firstName"
@@ -20,7 +20,7 @@ const User = (props) => {
        placeholder="Enter your email...">
       </input>
       <button onClick={props.handleUserCreate}>Create</button>
-    </div>
+    </>
   )
 }
 
