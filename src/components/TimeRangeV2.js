@@ -47,17 +47,17 @@ export default class TimeRangeWeekV2 extends Component {
     .add(1, 'day')
     // .format("YYYY-MM-DDT00:00:00-5:00")
     //
-    console.log(beginDate, endDate)
+
 
     while(beginDate < endDate) {
       timeArray.push(beginDate)
 
       beginDate = moment(beginDate).add(1, 'hours')
     }
-    console.log(timeArray);
+
     this.setState({
       times: timeArray
-    }, () => console.log(this.state.times[0].format()))
+    })
   }
 
 
@@ -74,7 +74,7 @@ export default class TimeRangeWeekV2 extends Component {
         </div>
       )
     } else if (this.state.range.length === 2) {
-      console.log(this.state.range[0], time)
+
       while (this.state.range[0] < this.state.range[1]) {
         if (time === this.state.range[0]) {
           return (
@@ -87,7 +87,7 @@ export default class TimeRangeWeekV2 extends Component {
         }
         moment(this.state.range).add(1, 'hour')
       }
-      console.log(moment(this.state.range[0]))
+
       return (
         <div></div>
       )
@@ -104,7 +104,6 @@ export default class TimeRangeWeekV2 extends Component {
 
   setColor = () => {
     return this.state.times.forEach(time => {
-      console.log(this.state.range[0], time)
       if (this.state.range[0] === time) {
         this.setState({
           rangeColor: 'blue'
@@ -115,9 +114,7 @@ export default class TimeRangeWeekV2 extends Component {
     })
   }
 
-  renderRange = () => {
-    console.log('hello')
-  }
+
 
   createRange = (time) => {
     if (this.state.range.length <= 1) {

@@ -1,4 +1,4 @@
-import { SET_DATE_RANGE, SET_USER_INFORMATION } from '../actions/types'
+import { SET_DATE_RANGE, SET_USER_INFORMATION, SET_DATES_WITH_TIMES } from '../actions/types'
 
 
 
@@ -20,6 +20,12 @@ export const scribbleReducer = (state = initialState, action) => {
   return {
     ...state,
     userInformation:  action.payload.userInformation
+    }
+
+  case SET_DATES_WITH_TIMES:
+    return {
+      ...state,
+      datesWithTimes: action.payload.datesWithTimes
     }
 
     default:

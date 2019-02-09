@@ -2,6 +2,7 @@
 import { Route, Switch } from 'react-router'
 import HomeContainer from './containers/HomeContainer'
 import CreateRangeContainer from './containers/CreateRangeContainer'
+import CreateMeetingTimesContainer from './containers/CreateMeetingTimesContainer'
 import CreateTimesContainer from './containers/CreateTimesContainer'
 import MeetingContainer from './containers/MeetingContainer'
 import CreateDateRangeContainer from './containers/CreateDateRangeContainer'
@@ -17,8 +18,8 @@ class App extends Component {
       <Switch>
       <Route path="/home" render={(props) => <HomeContainer {...props}/>}/>
       <Route path="/create/date_range" render={(props) => <CreateDateRangeContainer/>}/>
-      <Route exact path="/create/meeting_range" render={(props) => <CreateRangeContainer {...props}/>}/>
-      <Route exact path="/meeting_range/create/times" render={(props) => <CreateTimesContainer {...props}/>}/>
+      <Route exact path="/create/meeting_range" render={(props) => <CreateMeetingTimesContainer {...props}/>}/>
+      <Route exact path="/create/meeting_times" render={(props) => <CreateRangeContainer {...props}/>}/>
       <Route exact path="/meeting_range/:id" render={(props) => <PresentationContainer {...props}/>}/>
       <Route exact path="/meeting_range/:id/admin" render={(props) => <MeetingContainer {...props}/>}/>
       <Route exact path="/meeting_range/:id/add" render={(props) => <SelectTimesContainer {...props}/>}/>

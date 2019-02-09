@@ -1,5 +1,5 @@
-import { SET_DATE_RANGE } from './types'
-import { SET_USER_INFORMATION } from './types'
+import { SET_DATE_RANGE, SET_USER_INFORMATION, SET_DATES_WITH_TIMES } from './types'
+
 
 export const setDateRange = (dateRange) => {
     return {
@@ -16,6 +16,16 @@ export const setUserInformation = (userInformation) => {
     type: SET_USER_INFORMATION,
     payload: {
       userInformation
+    }
+  }
+}
+
+export const setDatesWithTimes = (datesWithTimes) => {
+  console.log(datesWithTimes)
+  return {
+    type: SET_DATES_WITH_TIMES,
+    payload: {
+      datesWithTimes
     }
   }
 }

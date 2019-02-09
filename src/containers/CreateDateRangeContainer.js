@@ -54,11 +54,12 @@ class CreateDateRangeContainer extends Component {
     }
     dateArray.push(moment(endDate).format())
 
-    if (dateArray.length < 7) {
-    return {1: dateArray}
-  } else {
-    return {1: dateArray.slice(0, 7), 2: dateArray.slice(7, 14)}
-  }
+    return dateArray
+  //   if (dateArray.length < 7) {
+  //   return {1: dateArray}
+  // } else {
+  //   return {1: dateArray.slice(0, 7), 2: dateArray.slice(7, 14)}
+  // }
 
   }
 

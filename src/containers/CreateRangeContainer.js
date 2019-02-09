@@ -30,7 +30,7 @@ const TimeRangeWeek = (props) => {
     return 'LOADING...'
   }
   }
-  
+
   return(
     <>
       {renderWeek()}
@@ -125,16 +125,17 @@ class CreateRangeContainer extends Component {
 
 
    render() {
+     console.log(this.props)
      if (this.state.redirect) {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
-     } else {
+     } else if (this.props.datesWithTimes) {
      return (
         <div className="day-range-grid">
-        <div className="day-range-grid-item1">
-        <label>
-          Setup Times You're Available
-        </label>
-        </div>
+          <div className="day-range-grid-item1">
+            <label>
+              Setup Times You're Available
+            </label>
+          </div>
         <div className="time-range-pagination">
           <button onClick={() => this.handlePaginationBackward()}>
             ⟵
@@ -144,17 +145,19 @@ class CreateRangeContainer extends Component {
           </button>
         </div>
 
-          <TimeRangeWeek
-          dates={this.props.dateRange} activePage={this.state.activePage}/>
+          {/*<TimeRangeWeek
+            dates={this.props.dateRange} activePage={this.state.activePage}
+            />*/}
           <button className="time-range-save"
             onClick={() => {}}>
             Save Times
           </button>
         </div>
-
      )
+   } else {
+     return(<div>LOADING...</div>)
    }
    }
  }
 
- export default withRouter(connect(state => ({dateRange: state.dateRange, userInformation: state.userInformation}))(CreateRangeContainer))
+ export default withRouter(connect(state => ({dateRange: state.dateRange, userInformation: state.userInformation, datesWithTimes: state.datesWithTimes}))(CreateRangeContainer))
