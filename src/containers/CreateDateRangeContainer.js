@@ -31,7 +31,7 @@ class CreateDateRangeContainer extends Component {
         ...this.state.time,
         beginDate: date
       }
-    })
+    }, () => console.log(this.state.time.beginDate))
   }
 
   handleEndDatePicker = (date) => {
@@ -49,11 +49,11 @@ class CreateDateRangeContainer extends Component {
     let dateArray = [];
     let currentDate = beginDate
     while (currentDate < endDate) {
-        dateArray.push(moment(currentDate).format())
+        dateArray.push(moment(currentDate).toDate())
         currentDate = moment(currentDate).add(1, 'days');
     }
-    dateArray.push(moment(endDate).format())
-
+    dateArray.push(moment(endDate).toDate())
+    console.log(dateArray)
     return dateArray
   //   if (dateArray.length < 7) {
   //   return {1: dateArray}

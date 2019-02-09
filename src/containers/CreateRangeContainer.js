@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
-import TimeRangeV2 from '../components/TimeRangeV2'
+
+
+import TimeRangeWeek from '../components/TimeRangeWeek'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
@@ -8,35 +10,6 @@ import { connect } from 'react-redux'
 import '../App.css'
 import { store } from '../index.js'
 import { state } from 'react-redux'
-
-
-
-const TimeRangeWeek = (props) => {
-  console.log(props.dates)
-  const renderWeek = () => {
-    if (props.dates[props.activePage]) {
-    return props.dates[props.activePage].map((date, i) => {
-      return (
-        <span
-          key={i}
-          className={`time-range-day-${i + 1} time-range-day-border`}>
-            {moment(date).format('LL')}
-            <span>
-              <TimeRangeV2 date={date} />
-            </span>
-        </span>)
-    })
-  } else {
-    return 'LOADING...'
-  }
-  }
-
-  return(
-    <>
-      {renderWeek()}
-    </>
-  )
-}
 
 
 class CreateRangeContainer extends Component {
@@ -99,7 +72,13 @@ class CreateRangeContainer extends Component {
 
 
   setupDates = () => {
+    const { datesWithTimes } = this.props
+      if (datesWithTimes.length <= 6) {
+        return {1: datesWithTimes}
+      } else if (this.props.datesWithTimes > 6){
+        return {1: datesWithTimes.slice(0, 7), 2: datesWithTimes.slice(7, 14)}
 
+      }
 
 
 
@@ -145,9 +124,9 @@ class CreateRangeContainer extends Component {
           </button>
         </div>
 
-          {/*<TimeRangeWeek
-            dates={this.props.dateRange} activePage={this.state.activePage}
-            />*/}
+          <TimeRangeWeek
+            dateWithTimes={this.setupDates()} activePage={this.state.activePage}
+            />
           <button className="time-range-save"
             onClick={() => {}}>
             Save Times

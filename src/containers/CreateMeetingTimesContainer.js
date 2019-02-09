@@ -49,6 +49,7 @@ class CreateMeetingTimesContainer extends Component {
 
  mapDays = () => {
    return this.props.dateRange.map(date => {
+     console.log(date);
      return <CreateTimeRange date={date} redirect={this.state.redirect} handleDatesInState={this.handleDatesInState} handleRedirect={this.handleRedirect}/>
    })
    // return this.getDates(this.props.location.state.beginDate, this.props.location.state.endDate).map(day => {

@@ -20,7 +20,7 @@ export default class TimeRangeWeekV2 extends Component {
 
   // renderTimes = () => {
   //   const timeArray = []
-  //   let beginDate = moment(moment(this.props.date).format(), [moment.HTML5_FMT.DATE])
+  //   let beginDate =  moment(moment(this.props.date).format(), [moment.HTML5_FMT.DATE])
   //
   //   const endDate = moment(moment(this.props.date).format(), [moment.HTML5_FMT.DATE]).add(1, 'day')
   //
@@ -40,24 +40,24 @@ export default class TimeRangeWeekV2 extends Component {
   renderTimes = () => {
     const timeArray = []
     // console.log(moment(this.props.date).format("YYYY-MM-DDT00:00:00-5:00"))
-    let beginDate = moment(this.props.date)
+    let beginTime = this.props.beginTime
     // .format("YYYY-MM-DDT00:00:00-5:00")
 
-    const endDate = moment(this.props.date)
-    .add(1, 'day')
+    const endTime = this.props.endTime
     // .format("YYYY-MM-DDT00:00:00-5:00")
     //
+    console.log(typeof beginTime);
 
 
-    while(beginDate < endDate) {
-      timeArray.push(beginDate)
+    while(beginTime < endTime) {
+      timeArray.push(beginTime)
 
-      beginDate = moment(beginDate).add(1, 'hours')
+      beginTime = moment(beginTime).add(1, 'hours')
     }
 
     this.setState({
       times: timeArray
-    })
+    }, () => console.log(this.state.times))
   }
 
 
@@ -65,40 +65,12 @@ export default class TimeRangeWeekV2 extends Component {
 
   mappedTimes = () => {
     return this.state.times.map(time => {
-      if (this.state.range[0] === time || this.state.range[1] === time) {
-      return (
-        <div
-          style={{color: this.state.rangeColor}}
-          onClick={() => this.createRange(time)}>
-          {time.format("h:mm a")}
-        </div>
-      )
-    } else if (this.state.range.length === 2) {
-
-      while (this.state.range[0] < this.state.range[1]) {
-        if (time === this.state.range[0]) {
-          return (
-            <div
-              style={{color: this.state.rangeColor}}
-              onClick={() => this.createRange(time)}>
-              {time.format("h:mm a")}
-            </div>
-          )
-        }
-        moment(this.state.range).add(1, 'hour')
-      }
-
-      return (
-        <div></div>
-      )
-    } else {
       return (
         <div
         onClick={() => this.createRange(time)}>
-        {time.format("h:mm a")}
+        {time}
         </div>
       )
-    }
     })
   }
 

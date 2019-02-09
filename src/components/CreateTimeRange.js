@@ -21,7 +21,6 @@ class CreateTimeRange extends Component {
  }
 
  componentDidUpdate(){
-
    if (this.props.redirect) {
      this.props.handleDatesInState({date: this.props.date, beginTime: moment(this.state.beginTime).format(), endTime: moment(this.state.endTime).format()})
 
@@ -33,7 +32,7 @@ class CreateTimeRange extends Component {
  handleBeginTimeChange = (date) => {
    this.setState({
      beginTime: date
-   }, () => console.log(typeof this.props.date))
+   }, () => console.log(this.props.date))
  }
 
  handleEndTimeChange = (date) => {
