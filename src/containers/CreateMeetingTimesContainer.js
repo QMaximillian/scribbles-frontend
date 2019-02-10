@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-// import { withRouter } from 'react-router'
-// import { connect } from 'react-redux'
-import { setDatesWithTimes } from '../actions/index'
+import { fetchCreateUser } from '../adapters/index'
+import { setDatesWithTimes, createUser } from '../actions/index'
 import moment from 'moment'
 import { Redirect, withRouter } from 'react-router'
 import { connect, store } from 'react-redux'
@@ -20,6 +19,9 @@ class CreateMeetingTimesContainer extends Component {
      redirect2: false
    }
  }
+
+
+
 
  getDates = (startDate, stopDate) => {
    let dateArray = [];
@@ -48,8 +50,7 @@ class CreateMeetingTimesContainer extends Component {
  }
 
  mapDays = () => {
-   return this.props.dateRange.map(date => {
-     console.log(date);
+   return this.getDates(this.props.dateRange[0], this.props.dateRange[1]).map(date => {
      return <CreateTimeRange date={date} redirect={this.state.redirect} handleDatesInState={this.handleDatesInState} handleRedirect={this.handleRedirect}/>
    })
    // return this.getDates(this.props.location.state.beginDate, this.props.location.state.endDate).map(day => {
@@ -73,7 +74,7 @@ class CreateMeetingTimesContainer extends Component {
        {this.mapDays()}
          </div>
          <div>Save Times
-         <button onClick={() => this.setState({redirect: !this.state.redirect})}>
+         <button onClick={() => this.setState({redirect: !this.state.redirect}, () => this.props.createUser({user: {...this.props.userInformation, meeting_range_id: this.props.meetingRangeId}}))}>
             Go To Meeting Container
          </button>
          </div>
@@ -83,4 +84,4 @@ class CreateMeetingTimesContainer extends Component {
   }
 }
 
-export default withRouter(connect(state => ({dateRange: state.dateRange}), ({ setDatesWithTimes }))(CreateMeetingTimesContainer))
+export default withRouter(connect(state => ({dateRange: state.dateRange, meetingRangeId: state.meetingRangeId, userInformation: state.userInformation }), ({ createUser, setDatesWithTimes }))(CreateMeetingTimesContainer))

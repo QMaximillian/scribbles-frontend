@@ -58,9 +58,9 @@ class CreateRangeContainer extends Component {
     })
   }
 
-  handleUserCreatePost = () => {
-    fetchCreateUser({user: {...this.state.user, meeting_range_id: this.state.meeting_range_id}})
-  }
+  // handleUserCreatePost = () => {
+  //   fetchCreateUser({user: {...this.state.user, meeting_range_id: this.state.meeting_range_id}})
+  // }
 
   handleIntervalChange = (e) => {
       this.setState({
@@ -102,6 +102,12 @@ class CreateRangeContainer extends Component {
     })
   }
 
+  handleSubmit = () => {
+    fetchCreateUser({
+      user: {...this.props.userInformation}
+    }).then(console.log())
+  }
+
 
    render() {
      console.log(this.props)
@@ -128,7 +134,7 @@ class CreateRangeContainer extends Component {
             dateWithTimes={this.setupDates()} activePage={this.state.activePage}
             />
           <button className="time-range-save"
-            onClick={() => {}}>
+            onClick={() => this.handleSubmit()}>
             Save Times
           </button>
         </div>

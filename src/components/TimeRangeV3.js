@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import moment from 'moment'
+import Time from '../components/Time'
+import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
 
-export default class TimeRangeWeekV2 extends Component {
+
+class TimeRangeWeekV3 extends Component {
   constructor(props){
     super(props)
 
@@ -36,23 +40,34 @@ export default class TimeRangeWeekV2 extends Component {
   //   })
   // }
 
+  getDates = (startDate, stopDate) => {
+    let dateArray = [];
+    let currentDate = moment(startDate);
+    let endDate = moment(stopDate);
+    while (currentDate <= endDate) {
+        dateArray.push(moment(currentDate).format())
+        currentDate = moment(currentDate).add(1, 'days');
+    }
+
+    return dateArray;
+  }
 
   renderTimes = () => {
     const timeArray = []
     // console.log(moment(this.props.date).format("YYYY-MM-DDT00:00:00-5:00"))
-    let beginTime = this.props.beginTime
+    let beginTime = moment(this.props.beginTime)
     // .format("YYYY-MM-DDT00:00:00-5:00")
 
-    const endTime = this.props.endTime
+    const endTime = moment(this.props.endTime)
     // .format("YYYY-MM-DDT00:00:00-5:00")
     //
     console.log(typeof beginTime);
 
 
     while(beginTime < endTime) {
-      timeArray.push(beginTime)
+      timeArray.push(moment(beginTime))
 
-      beginTime = moment(beginTime).add(1, 'hours')
+      beginTime = moment(beginTime).add(this.props.interval, 'minutes')
     }
 
     this.setState({
@@ -66,10 +81,9 @@ export default class TimeRangeWeekV2 extends Component {
   mappedTimes = () => {
     return this.state.times.map(time => {
       return (
-        <div
-        onClick={() => this.createRange(time)}>
-        {time}
-        </div>
+        <Time
+        onClick={() => {console.log('clicked')}}
+        time={time}/>
       )
     })
   }
@@ -88,23 +102,6 @@ export default class TimeRangeWeekV2 extends Component {
 
 
 
-  createRange = (time) => {
-    if (this.state.range.length <= 1) {
-      this.setState({
-        range: [...this.state.range, time]
-      }, () => this.setColor())
-    }
-
-
-    //
-    // if (this.state.range.length = 1) {
-      // map through the this.state.times
-      // if the time argument matches a time in the array
-
-    // }
-
-  }
-
 
    render() {
      console.log(this.state.times);
@@ -117,3 +114,5 @@ export default class TimeRangeWeekV2 extends Component {
      )
    }
  }
+
+ export default withRouter(connect(state => ({interval: state.interval}))(TimeRangeWeekV3))

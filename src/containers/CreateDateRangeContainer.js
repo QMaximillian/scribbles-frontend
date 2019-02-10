@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import { withRouter } from 'react-router-dom'
+import { fetchPostMeetingRange } from '../adapters/index'
 import DatePicker from 'react-datepicker'
-import { setDateRange } from '../actions/index'
+import { createMeetingRange, setIntervalTime, setDateRange } from '../actions/index'
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -19,7 +20,7 @@ class CreateDateRangeContainer extends Component {
       time: {
         beginDate: moment().toDate(),
         endDate: moment().toDate(),
-        interval: 0,
+        interval: 30,
       }
     }
   }
@@ -31,7 +32,7 @@ class CreateDateRangeContainer extends Component {
         ...this.state.time,
         beginDate: date
       }
-    }, () => console.log(this.state.time.beginDate))
+    })
   }
 
   handleEndDatePicker = (date) => {
@@ -41,6 +42,15 @@ class CreateDateRangeContainer extends Component {
         endDate: date
       }
     })
+  }
+
+  handleInterval = (e) => {
+    this.setState({
+      time: {
+        ...this.state.time,
+        interval: parseInt(e.target.value)
+      }
+    }, () => console.log(this.state.time.interval))
   }
 
   getDates = () => {
@@ -64,7 +74,14 @@ class CreateDateRangeContainer extends Component {
   }
 
   handleSubmit = () => {
-    this.props.setDateRange(this.getDates())
+    console.log('hello');
+    const { beginDate, endDate, interval} = this.state.time
+
+    this.props.createMeetingRange({meeting_range: {begin_date: beginDate, end_date: endDate, interval: interval }})
+
+    // this.props.createUser({})
+
+    // this.props.setDateRange([beginDate, endDate])
 
     this.setState({
       redirect: true
@@ -72,7 +89,6 @@ class CreateDateRangeContainer extends Component {
   }
 
    render() {
-     console.log(this.props)
      if (this.state.redirect) {
        return <Redirect to="/create/meeting_range"/>
      }
@@ -101,6 +117,14 @@ class CreateDateRangeContainer extends Component {
                  onChange={this.handleEndDatePicker}
                  selected={this.state.time.endDate}/>
             </div>
+            <div>
+              Time Slots<br/>
+              <select onChange={this.handleInterval}>
+                <option value={15}>15 min</option>
+                <option value={30}>30 min</option>
+                <option value={60}>60 min</option>
+              </select>
+            </div>
           <div className="date-range-container-item4">
           <button onClick={() => this.handleSubmit()}>
             CreateDays
@@ -112,4 +136,4 @@ class CreateDateRangeContainer extends Component {
    }
  }
 
-export default withRouter(connect(state => ({ state: state.userInformation }), { setDateRange })(CreateDateRangeContainer))
+export default withRouter(connect(state => ({ state: state.userInformation }), { createMeetingRange, setIntervalTime })(CreateDateRangeContainer))
