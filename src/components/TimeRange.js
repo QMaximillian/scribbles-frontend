@@ -44,20 +44,9 @@ const TimeRange = (props) => {
 
 
   return(
-    <>
-      <div>
-        <span>
-        {/* moment(props.beginTime).format('hh:mm a') 8*/}
-        </span>
         <div>
           {mappedTimesAvailable()}
         </div>
-        <span>
-        {/* moment(props.endTime).format('hh:mm a') 8*/}
-        </span>
-
-      </div>
-    </>
   )
 }
 

@@ -4,10 +4,11 @@ import HomeContainer from './containers/HomeContainer'
 import CreateRangeContainer from './containers/CreateRangeContainer'
 import CreateMeetingTimesContainer from './containers/CreateMeetingTimesContainer'
 import CreateTimesContainer from './containers/CreateTimesContainer'
-import MeetingContainer from './containers/MeetingContainer'
+import FinalContainer from './containers/FinalContainer'
+// import MeetingContainer from './containers/MeetingContainer'
 import HomeDateRangeContainer from './containers/HomeDateRangeContainer'
-import SelectTimesContainer from './containers/SelectTimesContainer'
-import PresentationContainer from './containers/PresentationContainer'
+// import SelectTimesContainer from './containers/SelectTimesContainer'
+// import PresentationContainer from './containers/PresentationContainer'
 import ConfirmedDate from './components/ConfirmedDate'
 import './App.css';
 
@@ -20,9 +21,9 @@ class App extends Component {
       <Route path="/create/user" render={(props) => <HomeContainer {...props}/>}/>
       <Route exact path="/create/meeting_range" render={(props) => <CreateMeetingTimesContainer {...props}/>}/>
       <Route exact path="/create/meeting_times" render={(props) => <CreateRangeContainer {...props}/>}/>
-      <Route exact path="/meeting_range/:id" render={(props) => <PresentationContainer {...props}/>}/>
-      <Route exact path="/meeting_range/:id/admin" render={(props) => <MeetingContainer {...props}/>}/>
-      <Route exact path="/meeting_range/:id/add" render={(props) => <SelectTimesContainer {...props}/>}/>
+      <Route exact path="/meeting_range/:id" render={(props) => <FinalContainer {...props}/>}/>
+      <Route exact path="/meeting_range/:id/:user_type" render={(props) => <FinalContainer {...props}/>}/>
+      <Route exact path="/meeting_range/:id/add" render={(props) => <FinalContainer {...props}/>}/>
       <Route exact path="/meeting_range/:id/confirmed" render={(props) => <ConfirmedDate {...props}/>}/>
       </Switch>
       </div>

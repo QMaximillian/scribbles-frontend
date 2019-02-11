@@ -22,10 +22,6 @@ class CreateRangeContainer extends Component {
     }
   }
 
-  componentDidMount(){
-
-  }
-
   handleBeginDatePicker = (date) => {
     this.setState({
       time: {
@@ -98,7 +94,7 @@ class CreateRangeContainer extends Component {
               {moment(date.date).format('LL')}
           </div>
           <div style={{border: 'black solid 2px'}}>
-            <TimeRangeV3 date={date.date} beginTime={date.beginTime} endTime={date.endTime} fetch={this.props.fetch} />
+            <TimeRangeV3 date={date.date} beginTime={date.beginTime} endTime={date.endTime} fetch={this.state.fetch} />
           </div>
         </div>)
     })
@@ -119,11 +115,14 @@ class CreateRangeContainer extends Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSave = () => {
     this.setState({
       fetch: !this.state.fetch,
+    })
+  }
 
-    }, () => this.setState({redirect: !this.state.redirect}))
+  handleSubmit = () => {
+   this.setState({redirect: !this.state.redirect})
   }
 
 
@@ -151,8 +150,12 @@ class CreateRangeContainer extends Component {
           {this.renderWeek()}
         </div>
           <button className=""
-            onClick={() => this.handleSubmit()}>
+            onClick={() => this.handleSave()}>
             Save Times
+          </button>
+          <button className=""
+            onClick={() => this.handleSubmit()}>
+            Checkout Times
           </button>
           </div>
         </div>

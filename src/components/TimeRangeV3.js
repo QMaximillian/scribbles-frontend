@@ -72,7 +72,7 @@ class TimeRangeV3 extends Component {
 
     this.setState({
       times: timeArray
-    })
+    }, () => console.log(this.props.fetch))
   }
 
 
@@ -83,7 +83,6 @@ class TimeRangeV3 extends Component {
       return (
         <Time
         fetch={this.props.fetch}
-        onClick={() => {}}
         time={time}/>
       )
     })

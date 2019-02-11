@@ -33,7 +33,7 @@ class Time extends Component {
 
     this.setState({
       toggleOn: !this.state.toggleOn
-    })
+    }, () => console.log(this.state.toggleOn))
 
     // if (this.props.handleFinalDate) {
     // this.props.handleFinalDate(moment(this.props.time).format())
@@ -41,28 +41,28 @@ class Time extends Component {
 
   }
 
-  // mappedMatch = () => {
-  //   if (this.props.joinedUsers.length === 0){
-  //     return
-  //   }
-  //
-  //   let array = []
-  //
-  //   this.props.joinedUsers.map(resp => {
-  //     return resp.meeting_times.forEach(meetingTime => {
-  //       if (moment(meetingTime.begin_time).format() === moment(this.props.time).format()) {
-  //
-  //         array.push(<span>{this.props.creator === resp.users.first_name ? undefined : resp.users.first_name}</span>)
-  //       }
-  //     })
-  //   })
-  //   return array
-  // }
+  mappedMatch = () => {
+    if (this.props.joinedUsers.length === 0){
+      return
+    }
+
+    let array = []
+
+    this.props.joinedUsers.map(resp => {
+      return resp.meeting_times.forEach(meetingTime => {
+        if (moment(meetingTime.begin_time).format() === moment(this.props.time).format()) {
+
+          array.push(<span>{this.props.creator === resp.users.first_name ? undefined : resp.users.first_name}</span>)
+        }
+      })
+    })
+    return array
+  }
 
   render() {
 
     return(
-      
+
       <div
         onClick={() => this.handleToggle()}
         style={{backgroundColor: `${this.state.toggleOn ? 'green' : 'white'}`}}>
@@ -71,6 +71,8 @@ class Time extends Component {
 
 
       {moment(this.props.time).add(this.props.interval, 'minutes').format("hh:mma")}
+
+
 
       </div>
 

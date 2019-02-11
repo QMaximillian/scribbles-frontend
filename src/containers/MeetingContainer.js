@@ -31,7 +31,7 @@ class MeetingContainer extends Component {
     fetchMeetingRange(this.props.match.params.id).then(resp => {
       console.log(resp)
       const datesArray = this.getDates(resp.meeting_range.begin_date, resp.meeting_range.end_date)
-      console.log(resp);
+
 
       this.setState({
         meetingTimes: resp.meeting_time,
