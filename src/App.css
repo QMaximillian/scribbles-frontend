@@ -22,12 +22,18 @@ div#root {
   justify-content: center;
 }
 
+
+.meeting-times-grid-placement {
+  grid-column: 2 / span 1;
+  grid-row: 2;
+}
 .meeting-times-grid {
   display: grid;
-  grid-column: 2 / span 7;
-  grid-row: 3 / span 8;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-column: 2;
+  grid-row: 2;
+  grid-template-columns: repeat(7, 1fr);
+
+
 
 }
 
@@ -40,7 +46,7 @@ div#root {
 }
 
 .meeting-times-pagination {
-  grid-column: 4;
+  grid-column: 3;
   grid-row: 2
 }
 
@@ -133,11 +139,8 @@ div#root {
   align-items: center;
   justify-items: center;
 }
-.meeting-times-container {
-  display: grid;
-  grid-row: 2 / span 9;
-  grid-column: 2 / span 7;
-}
+
+
 
 .meeting_range_item1 {
   grid-row: 1;

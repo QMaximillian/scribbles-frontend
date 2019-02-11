@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
-import TimeRangeWeek from '../components/TimeRangeWeek'
+import TimeRangeV3 from '../components/TimeRangeV3'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
@@ -20,6 +20,10 @@ class CreateRangeContainer extends Component {
       activePage: 1,
       fetch: false,
     }
+  }
+
+  componentDidMount(){
+
   }
 
   handleBeginDatePicker = (date) => {
@@ -75,19 +79,32 @@ class CreateRangeContainer extends Component {
     console.log(datesWithTimes)
       if (datesWithTimes.length <= 6) {
         return {1: datesWithTimes}
-      } else if (this.props.datesWithTimes > 6){
+      } else if (datesWithTimes.length > 6){
         return {1: datesWithTimes.slice(0, 7), 2: datesWithTimes.slice(7, 14)}
 
       }
+  }
 
-
-
-
-
-    // find dates in between the two dates given
-    // push every 7 dates into a object with an index key
-    // push them into an object with as {1: [// first 7 dates]}
-    //  pass object to TimeRangeWeek
+  renderWeek = () => {
+    const datesWithTimes = this.setupDates()
+    if (datesWithTimes[this.state.activePage]) {
+    return datesWithTimes[this.state.activePage].map((date, i) => {
+      return (
+        <div>
+          <div
+            key={i}
+            className={`time-range-day-${i + 1}`}
+            >
+              {moment(date.date).format('LL')}
+          </div>
+          <div style={{border: 'black solid 2px'}}>
+            <TimeRangeV3 date={date.date} beginTime={date.beginTime} endTime={date.endTime} fetch={this.props.fetch} />
+          </div>
+        </div>)
+    })
+  } else {
+    return 'LOADING...'
+  }
   }
 
   handlePaginationForward = () => {
@@ -117,8 +134,8 @@ class CreateRangeContainer extends Component {
        return <Redirect exact to={{ pathname: `/meeting_range/${this.props.meetingRangeId}/admin`}}/>
      } else if (this.props.datesWithTimes) {
      return (
-        <div className="home-grid-v2">
-          <div className="meeting-times-container border">
+        <div className="home-grid">
+          <div className="meeting-times-grid-placement border">
             <div className="meeting-times-header">
               Setup Times You're Available
             </div>
@@ -131,10 +148,7 @@ class CreateRangeContainer extends Component {
           </button>
         </div>
         <div className="meeting-times-grid">
-          <TimeRangeWeek
-          fetch={this.state.fetch}
-            datesWithTimes={this.setupDates()} activePage={this.state.activePage}
-            />
+          {this.renderWeek()}
         </div>
           <button className=""
             onClick={() => this.handleSubmit()}>
@@ -143,7 +157,8 @@ class CreateRangeContainer extends Component {
           </div>
         </div>
      )
-   } else {
+   } else if(this.props.activePage < 1 || this.state.activePage > 2){
+
      return(<div>LOADING...</div>)
    }
    }

@@ -62,9 +62,10 @@ class Time extends Component {
   render() {
 
     return(
+      
       <div
         onClick={() => this.handleToggle()}
-        style={{backgroundColor: `${this.state.toggleOn ? 'green' : '#e6e9ec'}`}}>
+        style={{backgroundColor: `${this.state.toggleOn ? 'green' : 'white'}`}}>
 
       {moment(this.props.time).format("hh:mma")} -
 

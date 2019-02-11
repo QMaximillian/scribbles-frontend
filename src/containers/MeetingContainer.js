@@ -46,7 +46,7 @@ class MeetingContainer extends Component {
         fetchUser(user_id).then(resp => {
           this.setState({
             joinedUsers: [...this.state.joinedUsers, resp]
-          }, () => console.log(this.state.meetingTimes))
+          }, () => console.log(this.state))
         })
       })
     })
