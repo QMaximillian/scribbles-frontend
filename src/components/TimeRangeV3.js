@@ -5,7 +5,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 
 
-class TimeRangeWeekV3 extends Component {
+class TimeRangeV3 extends Component {
   constructor(props){
     super(props)
 
@@ -95,15 +95,12 @@ class TimeRangeWeekV3 extends Component {
 
 
    render() {
-
      return (
-        <div
-        style={{overflow: 'scroll'}}>
-
-          <div>{this.mappedTimes()}</div>
-        </div>
+          <div>
+            {this.mappedTimes()}
+          </div>
      )
    }
  }
 
- export default withRouter(connect(state => ({interval: state.interval}))(TimeRangeWeekV3))
+ export default withRouter(connect(state => ({interval: state.interval}))(TimeRangeV3))

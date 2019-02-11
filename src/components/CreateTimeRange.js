@@ -45,8 +45,11 @@ class CreateTimeRange extends Component {
 
   render(){
     return(
-      <>
+      <div className={this.props.className}>
+        <div>
         {moment(this.props.date).format('LL')}
+        </div>
+        <div>
         <DatePicker
         showTimeSelect
         showTimeSelectOnly
@@ -63,7 +66,8 @@ class CreateTimeRange extends Component {
         dateFormat="h:mm aa"
         placeholderText="Choose a time"
         />
-      </>
+        </div>
+      </div>
     )
   }
 }

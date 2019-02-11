@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom'
 import moment from 'moment'
 import CreateDay from '../components/CreateDay'
 import { withRouter } from 'react-router'
+import "../App.css"
 
 
 class CreateTimesContainer extends Component {
@@ -48,8 +49,8 @@ class CreateTimesContainer extends Component {
        )
      } else {
        return (
+         <div className="home-grid">
          <div>
-         <div style={{textAlign: 'center'}}>
           Set Time Ranges to Meet
          </div>
           <div>

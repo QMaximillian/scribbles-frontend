@@ -12,14 +12,16 @@ const TimeRangeWeek = (props) => {
     return props.datesWithTimes[props.activePage].map((date, i) => {
 
       return (
-        <span
+        <span>
+        <div
           key={i}
-          className={`time-range-day-${i + 1} time-range-day-border`}>
+          className={`time-range-day-${i + 1}`}
+          >
             {moment(date.date).format('LL')}
-            <span>
+          </div>
+            <div>
               <TimeRangeV3 date={date.date} beginTime={date.beginTime} endTime={date.endTime} fetch={props.fetch} />
-            </span>
-        </span>)
+            </div></span>)
     })
   } else {
     return 'LOADING...'
@@ -29,9 +31,9 @@ const TimeRangeWeek = (props) => {
 
 
   return(
-    <>
+    <div className="">
       {renderWeek()}
-    </>
+    </div>
   )
 }
 

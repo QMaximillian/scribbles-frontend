@@ -21,10 +21,6 @@ class CreateMeetingTimesContainer extends Component {
  }
 
 
-componentDidMount(){
-
-}
-
 
 
  getDates = (startDate, stopDate) => {
@@ -54,8 +50,8 @@ componentDidMount(){
  }
 
  mapDays = () => {
-   return this.getDates(this.props.dateRange[0], this.props.dateRange[1]).map(date => {
-     return <CreateTimeRange date={date} redirect={this.state.redirect} handleDatesInState={this.handleDatesInState} handleRedirect={this.handleRedirect}/>
+   return this.getDates(this.props.dateRange[0], this.props.dateRange[1]).map((date, i) => {
+     return <CreateTimeRange className={`meeting-range-grid-item${i+1}`} date={date} redirect={this.state.redirect} handleDatesInState={this.handleDatesInState} handleRedirect={this.handleRedirect}/>
    })
    // return this.getDates(this.props.location.state.beginDate, this.props.location.state.endDate).map(day => {
    //   return <CreateDay day={day} fetch={this.state.fetch} meeting_range_id={this.props.location.state.meeting_range_id}/>
@@ -76,17 +72,19 @@ componentDidMount(){
       )
     } else {
       return (
-        <div className="create-time-container border">
-        <div>
+        <div className="home-grid-v2">
+        <div className="meeting-range-container border">
+        <div className="meeting_range_item1">
          Set Time Ranges to Meet
         </div>
-         <div>
+         <div className="meeting-range-grid">
        {this.mapDays()}
          </div>
-         <div>Save Times
+         <div className="meeting-range-item-last">
          <button onClick={() => this.handleSubmit()}>
             Go To Meeting Container
          </button>
+         </div>
          </div>
          </div>
       )

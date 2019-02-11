@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
-
-
 import TimeRangeWeek from '../components/TimeRangeWeek'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
@@ -119,13 +117,12 @@ class CreateRangeContainer extends Component {
        return <Redirect exact to={{ pathname: `/meeting_range/${this.props.meetingRangeId}/admin`}}/>
      } else if (this.props.datesWithTimes) {
      return (
-        <div className="day-range-grid">
-          <div className="day-range-grid-item1">
-            <label>
+        <div className="home-grid-v2">
+          <div className="meeting-times-container border">
+            <div className="meeting-times-header">
               Setup Times You're Available
-            </label>
-          </div>
-        <div className="time-range-pagination">
+            </div>
+        <div className="meeting-times-pagination">
           <button onClick={() => this.handlePaginationBackward()}>
             ⟵
           </button>
@@ -133,15 +130,17 @@ class CreateRangeContainer extends Component {
             ⟶
           </button>
         </div>
-
+        <div className="meeting-times-grid">
           <TimeRangeWeek
           fetch={this.state.fetch}
             datesWithTimes={this.setupDates()} activePage={this.state.activePage}
             />
-          <button className="time-range-save"
+        </div>
+          <button className=""
             onClick={() => this.handleSubmit()}>
             Save Times
           </button>
+          </div>
         </div>
      )
    } else {
