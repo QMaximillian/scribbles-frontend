@@ -19,7 +19,8 @@ class CreateRangeContainer extends Component {
     this.state = {
       meeting_range_id: 0,
       redirect: false,
-      activePage: 1
+      activePage: 1,
+      fetch: false,
     }
   }
 
@@ -73,6 +74,7 @@ class CreateRangeContainer extends Component {
 
   setupDates = () => {
     const { datesWithTimes } = this.props
+    console.log(datesWithTimes)
       if (datesWithTimes.length <= 6) {
         return {1: datesWithTimes}
       } else if (this.props.datesWithTimes > 6){
@@ -103,16 +105,18 @@ class CreateRangeContainer extends Component {
   }
 
   handleSubmit = () => {
-    fetchCreateUser({
-      user: {...this.props.userInformation}
-    }).then(console.log())
+    this.setState({
+      fetch: !this.state.fetch,
+
+    }, () => this.setState({redirect: !this.state.redirect}))
   }
 
 
+
    render() {
-     console.log(this.props)
+     console.log(this.props.meetingRangeId)
      if (this.state.redirect) {
-       return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
+       return <Redirect exact to={{ pathname: `/meeting_range/${this.props.meetingRangeId}/admin`}}/>
      } else if (this.props.datesWithTimes) {
      return (
         <div className="day-range-grid">
@@ -131,7 +135,8 @@ class CreateRangeContainer extends Component {
         </div>
 
           <TimeRangeWeek
-            dateWithTimes={this.setupDates()} activePage={this.state.activePage}
+          fetch={this.state.fetch}
+            datesWithTimes={this.setupDates()} activePage={this.state.activePage}
             />
           <button className="time-range-save"
             onClick={() => this.handleSubmit()}>
@@ -145,4 +150,4 @@ class CreateRangeContainer extends Component {
    }
  }
 
- export default withRouter(connect(state => ({dateRange: state.dateRange, userInformation: state.userInformation, datesWithTimes: state.datesWithTimes}))(CreateRangeContainer))
+ export default withRouter(connect(state => ({dateRange: state.dateRange, userInformation: state.userInformation, datesWithTimes: state.datesWithTimes, meetingRangeId: state.meetingRangeId}))(CreateRangeContainer))

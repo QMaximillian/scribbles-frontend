@@ -2,14 +2,7 @@ import { SET_DATE_RANGE, SET_USER_INFORMATION, SET_DATES_WITH_TIMES, SET_INTERVA
 import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index'
 
 
-export const setDateRange = (dateRange) => {
-    return {
-      type: SET_DATE_RANGE,
-      payload: {
-        dateRange
-      }
-    }
-  }
+
 
 export const createMeetingRange = (body) => {
   return (dispatch) => {
@@ -21,6 +14,35 @@ export const createMeetingRange = (body) => {
   }
 }
 
+
+
+export const createUser = (body) => {
+  return (dispatch) => {
+    fetchCreateUser(body).then(resp => {
+
+      dispatch(setUserInformation({first_name: resp.first_name, last_name: resp.last_name, email: resp.email, user_id: resp.id}))
+    })
+  }
+}
+
+export const createMeetingTime = (body) => {
+  return (dispatch) => {
+    fetchCreateUser(body).then(resp => {
+      console.log(resp)
+      dispatch(setUserInformation({first_name: resp.first_name, last_name: resp.last_name, email: resp.email}))
+    })
+  }
+}
+
+export const setDateRange = (dateRange) => {
+    return {
+      type: SET_DATE_RANGE,
+      payload: {
+        dateRange
+      }
+    }
+  }
+
 export const setMeetingRangeId = (meetingRangeId) => {
     return {
       type: SET_MEETING_RANGE_ID,
@@ -28,14 +50,6 @@ export const setMeetingRangeId = (meetingRangeId) => {
         meetingRangeId
       }
     }
-}
-
-export const createUser = (body) => {
-  return (dispatch) => {
-    fetchCreateUser(body).then(resp => {
-      dispatch(setUserInformation(resp))
-    })
-  }
 }
 
 
@@ -49,7 +63,7 @@ export const setUserInformation = (userInformation) => {
 }
 
 export const setDatesWithTimes = (datesWithTimes) => {
-  console.log(datesWithTimes)
+
   return {
     type: SET_DATES_WITH_TIMES,
     payload: {

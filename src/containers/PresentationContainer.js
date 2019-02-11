@@ -65,7 +65,7 @@ export default class PresentationContainer extends Component {
     let dayArray = []
     for (let range in meetingRange) {
       for (let time in meetingTimes) {
-        if (meetingRange[range].slice(0, 10) === meetingTimes[time].day) {
+        if (meetingRange[range].slice(0, 10) === meetingTimes[time].day.slice(0, 10)) {
           dayArray.push(
           <Day
             creator={this.state.users[0].first_name}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { fetchCreateUser } from '../adapters/index'
-import { setDatesWithTimes, createUser } from '../actions/index'
+
+import { setDatesWithTimes } from '../actions/index'
 import moment from 'moment'
 import { Redirect, withRouter } from 'react-router'
 import { connect, store } from 'react-redux'
@@ -20,6 +20,10 @@ class CreateMeetingTimesContainer extends Component {
    }
  }
 
+
+componentDidMount(){
+
+}
 
 
 
@@ -58,6 +62,12 @@ class CreateMeetingTimesContainer extends Component {
    // })
  }
 
+ handleSubmit = () => {
+
+
+  this.setState({redirect: !this.state.redirect})
+ }
+
   render() {
     if (this.state.redirect && this.state.redirect2) {
       return (
@@ -74,7 +84,7 @@ class CreateMeetingTimesContainer extends Component {
        {this.mapDays()}
          </div>
          <div>Save Times
-         <button onClick={() => this.setState({redirect: !this.state.redirect}, () => this.props.createUser({user: {...this.props.userInformation, meeting_range_id: this.props.meetingRangeId}}))}>
+         <button onClick={() => this.handleSubmit()}>
             Go To Meeting Container
          </button>
          </div>
@@ -84,4 +94,4 @@ class CreateMeetingTimesContainer extends Component {
   }
 }
 
-export default withRouter(connect(state => ({dateRange: state.dateRange, meetingRangeId: state.meetingRangeId, userInformation: state.userInformation }), ({ createUser, setDatesWithTimes }))(CreateMeetingTimesContainer))
+export default withRouter(connect(state => ({dateRange: state.dateRange, meetingRangeId: state.meetingRangeId, userInformation: state.userInformation }), ({ setDatesWithTimes }))(CreateMeetingTimesContainer))

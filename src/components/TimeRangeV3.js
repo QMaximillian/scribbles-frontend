@@ -61,7 +61,7 @@ class TimeRangeWeekV3 extends Component {
     const endTime = moment(this.props.endTime)
     // .format("YYYY-MM-DDT00:00:00-5:00")
     //
-    console.log(typeof beginTime);
+
 
 
     while(beginTime < endTime) {
@@ -72,7 +72,7 @@ class TimeRangeWeekV3 extends Component {
 
     this.setState({
       times: timeArray
-    }, () => console.log(this.state.times))
+    })
   }
 
 
@@ -82,29 +82,20 @@ class TimeRangeWeekV3 extends Component {
     return this.state.times.map(time => {
       return (
         <Time
-        onClick={() => {console.log('clicked')}}
+        fetch={this.props.fetch}
+        onClick={() => {}}
         time={time}/>
       )
     })
   }
 
-  setColor = () => {
-    return this.state.times.forEach(time => {
-      if (this.state.range[0] === time) {
-        this.setState({
-          rangeColor: 'blue'
-        })
-      } else {
-        this.setState({rangeColor: 'red'})
-      }
-    })
-  }
+
 
 
 
 
    render() {
-     console.log(this.state.times);
+
      return (
         <div
         style={{overflow: 'scroll'}}>

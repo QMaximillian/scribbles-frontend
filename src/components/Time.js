@@ -14,6 +14,19 @@ class Time extends Component {
     }
   }
 
+  componentDidUpdate (){
+    if (this.props.fetch && this.state.toggleOn) {
+      fetchCreateMeetingTime({
+          meeting_time: {
+            meeting_range_id: this.props.meetingRangeId,
+            begin_time: moment(this.props.time).format(),
+            end_time: moment(this.props.time).add(this.props.interval, 'minutes').format(),
+            user_id: this.props.userInformation.user_id,
+            day: moment(this.props.time).format('YYYY-MM-DD'),
+          }
+        })
+    }
+  }
 
 
   handleToggle = () => {
@@ -26,19 +39,6 @@ class Time extends Component {
     // this.props.handleFinalDate(moment(this.props.time).format())
   // }
 
-  }
-
-  handleSubmit = () => {
-    if (this.state.toggleOn) {
-      fetchCreateMeetingTime({
-          meeting_time: {
-            begin_time: moment(this.props.time).format(),
-            end_time: moment(this.props.time).add(this.props.interval, 'minutes').format(),
-            user_id: this.props.user_id,
-            day: this.props.time.format('YYYY-MM-DD'),
-          }
-        })
-    }
   }
 
   // mappedMatch = () => {
@@ -60,9 +60,10 @@ class Time extends Component {
   // }
 
   render() {
+
     return(
       <div
-        onClick={this.handleToggle}
+        onClick={() => this.handleToggle()}
         style={{backgroundColor: `${this.state.toggleOn ? 'green' : '#e6e9ec'}`}}>
 
       {moment(this.props.time).format("hh:mma")} -
@@ -107,4 +108,4 @@ class Time extends Component {
 // }
 }
 
-export default withRouter(connect(state => ({state: state.userInformation,interval: state.interval}))(Time))
+export default withRouter(connect(state => ({userInformation: state.userInformation, meetingRangeId: state.meetingRangeId, interval: state.interval}))(Time))

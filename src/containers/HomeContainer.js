@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { setUserInformation } from '../actions/index'
-import { withRouter } from 'react-router'
+import { createUser } from '../actions/index'
+import { withRouter, Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import '../App.css'
 
@@ -23,23 +23,31 @@ class HomeContainer extends Component {
         ...this.state.user,
         [e.target.name]: e.target.value
       }
-    })
+    }, () => console.log({user: {...this.state.user}}))
+  }
+
+  handleSave = () => {
+    this.props.createUser({user: {...this.state.user, meeting_range_id: this.props.meetingRangeId }})
   }
 
   handleSubmit = () => {
-    this.props.setUserInformation(this.state.user)
-    return this.props.history.push('/create/date_range')
-
+    this.setState({
+      redirect: true
+    })
   }
+
    render() {
+     if (this.state.redirect) {
+       return <Redirect to='/create/meeting_range'/>
+     } else {
      return (
         <div className="home-grid">
           <div className="home-container border">
           <div className='home-container-item1'>
-          Welcome to Scribble
+
           </div>
 
-          <div className="home-container-item2">Schedule a simple meeting with Scribble
+          <div className="home-container-item2">Enter Your Information
           </div>
           <div className="home-container-item3">
             <label>
@@ -75,8 +83,13 @@ class HomeContainer extends Component {
           <div>
           <button
             className="home-container-item6"
+            onClick={() => this.handleSave()}>
+            Save Scribble
+          </button>
+          <button
+            className="home-container-item7"
             onClick={() => this.handleSubmit()}>
-            Create A Scribble
+            Create Scribble
           </button>
           </div>
         </div>
@@ -84,5 +97,6 @@ class HomeContainer extends Component {
      )
    }
  }
+ }
 
- export default withRouter(connect(state => ({ userInformation: state.user }), { setUserInformation })(HomeContainer))
+ export default withRouter(connect(state => ({ meetingRangeId: state.meetingRangeId }), { createUser })(HomeContainer))

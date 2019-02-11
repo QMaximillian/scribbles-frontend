@@ -3,9 +3,10 @@ import { fetchMeetingRange, fetchUpdateMeetingRange, fetchCreateInvitation, fetc
 import moment from 'moment'
 import Day from '../components/Day'
 import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 
-export default class MeetingContainer extends Component {
+class MeetingContainer extends Component {
 
   constructor(props) {
     super(props)
@@ -30,12 +31,7 @@ export default class MeetingContainer extends Component {
     fetchMeetingRange(this.props.match.params.id).then(resp => {
       console.log(resp)
       const datesArray = this.getDates(resp.meeting_range.begin_date, resp.meeting_range.end_date)
-
-      let meetingTimeConvert = resp.meeting_time.map(meetingTime => {
-        return moment(meetingTime.day).format()
-      })
-
-      console.log(meetingTimeConvert)
+      console.log(resp);
 
       this.setState({
         meetingTimes: resp.meeting_time,
@@ -43,14 +39,14 @@ export default class MeetingContainer extends Component {
         user_ids: resp.user_ids,
         users: resp.users,
         interval: resp.meeting_range.interval
-      })
+      }, () => console.log(this.state))
     })
     .then(resp => {
-      this.state.user_ids.forEach(user_id => {
+      this.state.user_ids.map(user_id => {
         fetchUser(user_id).then(resp => {
           this.setState({
             joinedUsers: [...this.state.joinedUsers, resp]
-          }, () => console.log(this.state.joinedUsers))
+          }, () => console.log(this.state.meetingTimes))
         })
       })
     })
@@ -74,7 +70,8 @@ export default class MeetingContainer extends Component {
     let dayArray = []
     for (let range in meetingRange) {
       for (let time in meetingTimes) {
-        if (meetingRange[range].slice(0, 10) === meetingTimes[time].day) {
+        console.log(meetingRange[range], meetingTimes[time])
+        if (meetingRange[range].slice(0, 10) === meetingTimes[time].day.slice(0, 10)) {
           dayArray.push(<Day
               handleFinalDate={this.handleFinalDate}
               finalChoice={this.state.finalChoice}
@@ -135,8 +132,7 @@ export default class MeetingContainer extends Component {
   // ability to send link through email to people you want to participate
 
    render() {
-     console.log(this.state.meetingRange)
-     console.log(this.state.meetingTimes);
+
      if (this.state.redirect) {
        return <Redirect exact to={{ pathname: `/meeting_range/${this.props.match.params.id}/confirmed`, state: { finalDate: this.state.finalDate, interval: this.state.interval } }}/>
      }
@@ -173,3 +169,5 @@ export default class MeetingContainer extends Component {
    }
    }
  }
+
+ export default withRouter(MeetingContainer)

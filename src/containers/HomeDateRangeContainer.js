@@ -10,7 +10,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 import '../App.css'
 
-class CreateDateRangeContainer extends Component {
+class HomeDateRangeContainer extends Component {
   constructor(props) {
     super(props)
 
@@ -63,7 +63,7 @@ class CreateDateRangeContainer extends Component {
         currentDate = moment(currentDate).add(1, 'days');
     }
     dateArray.push(moment(endDate).toDate())
-    console.log(dateArray)
+
     return dateArray
   //   if (dateArray.length < 7) {
   //   return {1: dateArray}
@@ -74,10 +74,10 @@ class CreateDateRangeContainer extends Component {
   }
 
   handleSubmit = () => {
-    console.log('hello');
+
     const { beginDate, endDate, interval} = this.state.time
 
-    this.props.createMeetingRange({meeting_range: {begin_date: beginDate, end_date: endDate, interval: interval }})
+    this.props.createMeetingRange({meeting_range: {begin_date: beginDate, end_date: endDate, interval: interval}})
 
     // this.props.createUser({})
 
@@ -90,13 +90,13 @@ class CreateDateRangeContainer extends Component {
 
    render() {
      if (this.state.redirect) {
-       return <Redirect to="/create/meeting_range"/>
+       return <Redirect to="/create/user"/>
      }
      return (
         <div className="home-grid">
         <div className="date-range-container border">
         <div className="date-range-container-item1">
-          Choose Your Range of Dates
+          Let's Pick Our Date Range
         </div>
           <div className="date-range-container-item2">
               <label>
@@ -136,4 +136,4 @@ class CreateDateRangeContainer extends Component {
    }
  }
 
-export default withRouter(connect(state => ({ state: state.userInformation }), { createMeetingRange, setIntervalTime })(CreateDateRangeContainer))
+export default withRouter(connect(state => ({ state: state.userInformation }), { createMeetingRange, setIntervalTime })(HomeDateRangeContainer))
