@@ -1,4 +1,4 @@
-import { SET_DATE_RANGE, SET_USER_INFORMATION, SET_DATES_WITH_TIMES, SET_INTERVAL_TIME, SET_MEETING_RANGE_ID } from '../actions/types'
+import { SET_DATE_RANGE, SET_USER_INFORMATION, SET_DATES_WITH_TIMES, SET_INTERVAL_TIME, SET_MEETING_RANGE_ID, SET_USER_TYPE } from '../actions/types'
 
 
 
@@ -38,6 +38,11 @@ export const scribbleReducer = (state = initialState, action) => {
   return {
     ...state,
     meetingRangeId: action.payload.meetingRangeId
+  }
+  case SET_USER_TYPE:
+  return {
+    ...state,
+    userType: action.payload.userType
   }
 
     default:

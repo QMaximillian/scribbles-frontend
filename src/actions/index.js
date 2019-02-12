@@ -1,4 +1,4 @@
-import { SET_DATE_RANGE, SET_USER_INFORMATION, SET_DATES_WITH_TIMES, SET_INTERVAL_TIME, SET_MEETING_RANGE_ID } from './types'
+import { SET_DATE_RANGE, SET_USER_INFORMATION, SET_DATES_WITH_TIMES, SET_INTERVAL_TIME, SET_MEETING_RANGE_ID, SET_USER_TYPE } from './types'
 import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index'
 
 
@@ -12,6 +12,15 @@ export const createMeetingRange = (body) => {
       dispatch(setMeetingRangeId(resp.id))
     })
   }
+}
+
+export const setUserType = (userType) => {
+  return {
+    type: SET_USER_TYPE,
+    payload: {
+      userType
+  }
+}
 }
 
 
