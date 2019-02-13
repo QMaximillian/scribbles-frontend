@@ -4,7 +4,7 @@ import { fetchPostMeetingRange, fetchCreateUser } from '../adapters/index.js'
 import { Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { withRouter } from 'react-router'
-import { Jumbotron } from 'react-bootstrap'
+import "../App.css"
 
 
 class CreateRangeContainer extends Component {
@@ -92,54 +92,68 @@ class CreateRangeContainer extends Component {
        return <Redirect exact to={{ pathname: '/meeting_range/create/times', state: { beginDate: this.state.time.beginDate, endDate: this.state.time.endDate, meeting_range_id: this.state.meeting_range_id} }}/>
      } else {
      return (
-        <Jumbotron>
-        <div style={{textAlign: 'center'}}>
-        <label>Create Your Meeting</label>
-        </div>
-          <label>
-            First Name
-          </label>
-          <input onChange={this.handleNameChange}
-            value={this.state.user.first_name}
-            name="first_name">
-          </input>
-          <label>
-            Last Name
-          </label>
-          <input
-            onChange={this.handleNameChange}
-            value={this.state.user.last_name}
-            name="last_name">
-          </input>
-          <label>
-            Email
-          </label>
-          <input
-            onChange={this.handleNameChange}
-            value={this.state.user.email}
-            name="email">
-          </input>
-          <DateRange
-            handleBeginDatePicker={this.handleBeginDatePicker}
-            beginDate={this.state.time.beginDate}
-            handleEndDatePicker={this.handleEndDatePicker}
-            endDate={this.state.time.endDate}/>
-            <div>
-              Time Limit
-              <select onChange={this.handleIntervalChange}>
+        <div className="base-layout-grid">
+          <div className="create-range-grid border">
+            <div className="create-range-header">
+              <label>Create Your Meeting</label>
+            </div>
+            <div className='create-range-first-name'>
+              <label>
+                First Name
+              </label><br />
+              <input onChange={this.handleNameChange}
+                value={this.state.user.first_name}
+                name="first_name">
+              </input>
+            </div>
+            <div className="create-range-last-name">
+              <label>
+                Last Name
+              </label><br />
+              <input
+                onChange={this.handleNameChange}
+                value={this.state.user.last_name}
+                name="last_name">
+              </input>
+            </div>
+            <div className="create-range-email">
+              <label>
+                Email
+              </label><br />
+              <input
+                onChange={this.handleNameChange}
+                value={this.state.user.email}
+                name="email">
+              </input>
+            </div>
+{/*has it's own divs*/}
+              <DateRange
+                className1={'create-range-first-day'}
+                className2={'create-range-second-day'}
+                handleBeginDatePicker={this.handleBeginDatePicker}
+                beginDate={this.state.time.beginDate}
+                handleEndDatePicker={this.handleEndDatePicker}
+                endDate={this.state.time.endDate}/>
+
+            <div className="create-range-time-limit">
+              <label>
+                Time Limit
+              </label><br/>
+              <select     onChange={this.handleIntervalChange}>
                 <option value={15}>15 min</option>
                 <option value={30}>30 min</option>
                 <option value={45}>45 min</option>
                 <option value={60}>60 min</option>
               </select>
             </div>
-          <button
-            onClick={() => this.handleFetchPost()}>
-            Choose Times
-          </button>
-
-
-        </Jumbotron>
+            <div className="create-range-submit-button">
+              <button
+                onClick={() => this.handleFetchPost()}>
+                Choose Times
+              </button>
+            </div>
+          </div>
+          </div>
      )
    }
    }

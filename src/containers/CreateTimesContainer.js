@@ -3,7 +3,8 @@ import {Redirect} from 'react-router-dom'
 import moment from 'moment'
 import CreateDay from '../components/CreateDay'
 import { withRouter } from 'react-router'
-import { Jumbotron } from 'react-bootstrap'
+
+
 
 class CreateTimesContainer extends Component {
   constructor(props){
@@ -28,8 +29,10 @@ class CreateTimesContainer extends Component {
 
 
   mapDays = () => {
-    return this.getDates(new Date(this.props.location.state.beginDate), new Date(this.props.location.state.endDate)).map(day => {
-      return <CreateDay day={day} fetch={this.state.fetch} meeting_range_id={this.props.location.state.meeting_range_id}/>
+    return this.getDates(new Date(this.props.location.state.beginDate), new Date(this.props.location.state.endDate)).map((day, i) => {
+      return <CreateDay day={day}
+      className={`create-time-item${i + 1}`}
+      fetch={this.state.fetch} meeting_range_id={this.props.location.state.meeting_range_id}/>
     })
   }
 
@@ -48,20 +51,28 @@ class CreateTimesContainer extends Component {
        )
      } else {
        return (
-         <Jumbotron>
-         <div style={{textAlign: 'center'}}>
+         <div className="base-layout-grid">
+         <div className="create-time-grid border">
+         <div className="create-time-header">
           Set Time Ranges to Meet
          </div>
-          <div>
+
         {this.mapDays()}
-          </div>
-          <div>
-            {this.state.fetch ? <div></div> :
+
+          <div className="create-time-button">
+            {this.state.fetch ? <></> :
+
             <button onClick={() => this.handleFetches()}>Save Times</button>
+
             }
-          <button onClick={() => this.setState({redirect: !this.state.redirect})}>Go To Meeting Container</button>
           </div>
-        </Jumbotron>
+          <div className="create-time-button">
+          {this.state.fetch ? <button onClick={() => this.setState({redirect: !this.state.redirect})}>Go To Meeting Container</button> : <></>
+
+        }
+          </div>
+        </div>
+        </div>
        )
      }
    }

@@ -26,6 +26,10 @@ export default class MeetingContainer extends Component {
 
   }
 
+  shouldComponentUpdate(nextState) {
+    return (nextState !== this.state)
+  }
+
   componentDidMount() {
     fetchMeetingRange(this.props.match.params.id).then(resp => {
       console.log(resp)
@@ -71,20 +75,30 @@ export default class MeetingContainer extends Component {
 
   mappedMeetingRange = () => {
     // Something other than map that doesn't return values if they do not match
-    return this.state.meetingRange.map(meetingRange => {
+    return this.state.meetingRange.map((meetingRange, i) => {
       return this.state.meetingTimes.map(meetingTime => {
         if (meetingTime.day === meetingRange.slice(0, 10)) {
+
           console.log(meetingTime)
         return (
+          <>
+          <div>
+          <div className="bold">
+            {moment(meetingRange).format('LL')}
+          </div>
           <Day
             handleFinalDate={this.handleFinalDate}
             finalChoice={this.state.finalChoice}
             creator={this.state.users[0].first_name}
             joinedUsers={this.state.joinedUsers}
             canClick={this.state.canClick}
-            meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
+            meetingTime={meetingTime}index={i + 1} day={moment(meetingRange).format('LL')}
             interval={this.state.interval}/>
+            </div>
+            <br/>
+            </>
           )
+
         }
       })
     })
@@ -135,38 +149,40 @@ export default class MeetingContainer extends Component {
   // ability to send link through email to people you want to participate
 
    render() {
-     console.log(this.state.meetingRange)
-     console.log(this.state.meetingTimes);
      if (this.state.redirect) {
        return <Redirect exact to={{ pathname: `/meeting_range/${this.props.match.params.id}/confirmed`, state: { finalDate: this.state.finalDate, interval: this.state.interval } }}/>
      }
 
      if (this.state.user_ids[0]) {
      return (
-       <Jumbotron>
-        <div>
+       <div className="base-layout-grid">
+        <div className="meeting-container-grid">
+        <div className="meeting-container-item-header">
           {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
-          <div style={{textAlign: 'center'}}>
-            Choose the date and click "End Poll" to submit
-          </div>
-          <br/>
-          {this.mappedMeetingRange()}
         </div>
-        <div>
-          <div>
-
-          </div>
+        <div className="meeting-container-item-header2">
+          Choose the date and click "End Poll" to submit
+        </div>
+        <div className="day-range">
+        {this.mappedMeetingRange()}
+        </div>
+        <div className="meeting-container-add-user">
+          <label>
+            Add A User
+          </label><br />
           <input
-          value={this.state.email} onChange={this.handleEmailInput}></input>
-          <button onClick={() => this.handleInvitationFetch()}> Add User
+            value={this.state.email} onChange={this.handleEmailInput}
+            placeholder="Email...">
+          </input>
+          <button onClick={() => this.handleInvitationFetch()}> Submit
           </button>
+        </div>
+        <div className="meeting-container-end-poll">
           <button onClick={() => this.handleEndPoll()}> End Poll
           </button>
         </div>
-        <div>
-
         </div>
-      </Jumbotron>
+      </div>
      )
    } else {
      return <div>{this.mappedMeetingRange()}</div>

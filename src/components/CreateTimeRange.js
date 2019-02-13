@@ -1,10 +1,11 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
 import { Jumbotron } from 'react-bootstrap'
+import moment from 'moment'
 
 const CreateTimeRange = (props) => {
   return(
-      <>
+      <div>
         <DatePicker
         showTimeSelect
         showTimeSelectOnly
@@ -21,7 +22,7 @@ const CreateTimeRange = (props) => {
         dateFormat="h:mm aa"
         placeholderText="Choose a time"
         />
-      </>
+        </div>
   )
 }
 

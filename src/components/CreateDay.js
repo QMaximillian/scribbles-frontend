@@ -45,18 +45,18 @@ class CreateDay extends Component {
 
   render() {
     return(
-      <>
-      <div>
-        <label value={this.props.day}>{moment(this.props.day).format('LL')}</label>
+      <div className={this.props.className}>
+        <div>
+          <label value={this.props.day}>{moment(this.props.day).format('LL')}</label>
+        </div>
+        <div>
+          <CreateTimeRange
+          beginTime={this.state.beginTime}
+          endTime={this.state.endTime}
+          handleBeginTimeChange={this.handleBeginTimeChange}
+          handleEndTimeChange={this.handleEndTimeChange}/>
+        </div>
       </div>
-      <div>
-        <CreateTimeRange
-        beginTime={this.state.beginTime}
-        endTime={this.state.endTime}
-        handleBeginTimeChange={this.handleBeginTimeChange}
-        handleEndTimeChange={this.handleEndTimeChange}/>
-      </div>
-      </>
     )
 }
 

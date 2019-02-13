@@ -1,10 +1,166 @@
-span:before {
-    content:" ";
-    display:inline-block;
-    width:32px;
+div#root {
+  height: 100vh;
 }
 
-body {
-  background-color: '#add8e6';
-  height: '100vh';
+
+.base-layout-grid {
+  display: grid;
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(9, 1fr);
+  height: 100vh;
+  grid-gap: 10px;
+}
+
+.home-grid {
+  display: grid;
+  grid-column: 2 / span 7;
+  grid-row: 3 / span 8;
+  grid-template-columns: 1;
+  grid-template-rows: 3;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px silver;
+  background-color: rgb(169,169,169, .8) !important
+}
+
+.border {
+  padding: 10px;
+  border: 10px solid;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 5px 5px black;
+}
+
+.create-range-grid {
+  display: grid;
+  grid-column: 2 / span 7;
+  grid-row: 3 / span 8;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px silver;
+  background-color: rgb(169,169,169, .8)
+}
+
+.create-range-header {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+}
+.create-range-first-name {
+  grid-column: 1;
+  grid-row: 2;
+}
+.create-range-last-name {
+  grid-column: 2;
+  grid-row: 2;
+}
+.create-range-email {
+  grid-column: 3;
+  grid-row: 2;
+}
+.create-range-first-day {
+  grid-column: 1;
+  grid-row: 3;
+}
+.create-range-second-day {
+  grid-column: 2;
+  grid-row: 3;
+}
+.create-range-time-limit {
+  grid-column: 3;
+  grid-row: 3;
+}
+.create-range-submit-button {
+  grid-column: 2;
+  grid-row: 4 / span 2;
+}
+
+.create-time-grid {
+  display: grid;
+  grid-column: 2 / span 7;
+  grid-row: 3 / span 8;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px silver;
+  background-color: rgb(169,169,169, .8)
+}
+
+.create-time-header {
+  grid-column: 1 / span 3
+}
+
+.create-time-item1 {
+  grid-column: 1;
+  grid-row: 2;
+}
+.create-time-item2 {
+  grid-column: 1;
+  grid-row: 3;
+}
+.create-time-item3 {
+  grid-column: 1;
+  grid-row: 4;
+}
+.create-time-button {
+  grid-column: 1 / span 3;
+  grid-row: 5;
+}
+
+.meeting-container-grid {
+  display: grid;
+  grid-column: 3 / span 5;
+  grid-row: 3 / span 8;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  align-items: center;
+  color: white;
+  text-shadow: 1px 1px silver;
+  background-color: rgb(169,169,169, .8);
+}
+
+.day-range {
+  grid-row: 5 / span 6;
+  grid-column: 1 / span 9;
+  margin-left: 10px;
+  max-height: 100%;
+  overflow-y: auto;
+  text-align: center;
+
+}
+
+.meeting-container-email {
+  grid-column: 4;
+  grid-row: 11 / span 2;
+  margin-right: 5px;
+}
+
+.bold {
+  font-size: 25px;
+}
+
+.meeting-container-item-header {
+  grid-column: 2 / span 2;
+  grid-row: 1 / span 2;
+}
+.meeting-container-item-header2 {
+  grid-column: 4 / span 3;
+  grid-row: 3;
+}
+
+.meeting-container-add-user {
+  grid-column: 7 / span 3;
+  grid-row: 1 / span 2;
+}
+.meeting-container-end-poll {
+  grid-column: 5;
+  grid-row: 11 / span 2;
 }
