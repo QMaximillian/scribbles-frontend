@@ -4,7 +4,7 @@ import moment from 'moment'
 import Day from '../components/Day'
 import User from '../components/User'
 import { withRouter } from 'react-router-dom'
-import { Jumbotron } from 'react-bootstrap'
+
 
 class SelectTimesContainer extends Component {
 
@@ -100,24 +100,38 @@ class SelectTimesContainer extends Component {
      console.log(this.props)
      if (this.state.userCreate) {
        return (
-         <Jumbotron>
-         <User handleChange={this.handleChange}
-         handleUserCreate={this.handleUserCreate}/>
-         </Jumbotron>
+         <div className="base-layout-grid">
+          <div className="meeting-container-grid">
+          <div style={{fontSize: '50px',
+          fontStyle: 'oblique'}} className="presentation-container-header">Scribble
+            </div>
+           <User handleChange={this.handleChange}
+         handleUserCreate={this.handleUserCreate}/></div>
+         </div>
        )
      } else {
 
      return (
-       <Jumbotron>
-        <div>
-        <div>
+       <div className="base-layout-grid">
+        <div className="meeting-container-grid">
+        <div className="meeting-container-item-header">
         {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
         </div>
+        <div className="meeting-container-item-header2">
+        <div style={{fontSize: '50px', fontStyle: 'oblique', textAlign: 'center'}}>Scribble
+          </div>
+          Pick the dates that work
+          </div>
+        <div className="day-range">
           {this.mappedMeetingRange()}
         </div>
-        <button onClick={this.handleFetchState}>{this.state.fetch ? 'Update' : 'Submit'} Times</button>
-        {this.state.fetch ? <button onClick={() => this.handleMainPageRedirect()}>All Results</button> : <div></div>}
-        </Jumbotron>
+        {this.state.fetch ? null :
+        <button className="meeting-container-end-poll" onClick={this.handleFetchState}>Submit Times</button>}
+
+        {this.state.fetch ? <button className="meeting-container-end-poll" onClick={() => this.handleMainPageRedirect()}>All Results</button> : null}
+        </div>
+        </div>
+
      )
    }
    }

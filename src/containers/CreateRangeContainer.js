@@ -95,7 +95,10 @@ class CreateRangeContainer extends Component {
         <div className="base-layout-grid">
           <div className="create-range-grid border">
             <div className="create-range-header">
-              <label>Create Your Meeting</label>
+            <div style={{fontSize: '50px', fontStyle: 'oblique'}}>Scribble
+
+              </div>
+              Create Your Meeting
             </div>
             <div className='create-range-first-name'>
               <label>
@@ -142,7 +145,7 @@ class CreateRangeContainer extends Component {
               <select     onChange={this.handleIntervalChange}>
                 <option value={15}>15 min</option>
                 <option value={30}>30 min</option>
-                <option value={45}>45 min</option>
+              {/* <option value={45}>45 min</option>*/}
                 <option value={60}>60 min</option>
               </select>
             </div>

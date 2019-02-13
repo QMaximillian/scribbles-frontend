@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { fetchCreateEndPoll, fetchMeetingRange, fetchUpdateMeetingRange, fetchCreateInvitation, fetchUser } from '../adapters/index.js'
+import { fetchMeetingRange, fetchUpdateMeetingRange, fetchCreateInvitation, fetchUser } from '../adapters/index.js'
 import moment from 'moment'
 import Day from '../components/Day'
 import { Redirect } from 'react-router-dom'
-import { Jumbotron } from 'react-bootstrap'
+
 
 export default class MeetingContainer extends Component {
 
@@ -26,9 +26,6 @@ export default class MeetingContainer extends Component {
 
   }
 
-  shouldComponentUpdate(nextState) {
-    return (nextState !== this.state)
-  }
 
   componentDidMount() {
     fetchMeetingRange(this.props.match.params.id).then(resp => {
@@ -78,14 +75,9 @@ export default class MeetingContainer extends Component {
     return this.state.meetingRange.map((meetingRange, i) => {
       return this.state.meetingTimes.map(meetingTime => {
         if (meetingTime.day === meetingRange.slice(0, 10)) {
-
-          console.log(meetingTime)
         return (
           <>
           <div>
-          <div className="bold">
-            {moment(meetingRange).format('LL')}
-          </div>
           <Day
             handleFinalDate={this.handleFinalDate}
             finalChoice={this.state.finalChoice}
@@ -161,6 +153,8 @@ export default class MeetingContainer extends Component {
           {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
         </div>
         <div className="meeting-container-item-header2">
+        <div style={{fontSize: '50px', fontStyle: 'oblique', textAlign: 'center'}}>Scribble
+          </div>
           Choose the date and click "End Poll" to submit
         </div>
         <div className="day-range">

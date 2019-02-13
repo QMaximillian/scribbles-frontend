@@ -1,7 +1,6 @@
 import React from 'react'
 import DatePicker from 'react-datepicker'
-import { Jumbotron } from 'react-bootstrap'
-import moment from 'moment'
+
 
 const CreateTimeRange = (props) => {
   return(

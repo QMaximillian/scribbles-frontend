@@ -54,6 +54,8 @@ class CreateTimesContainer extends Component {
          <div className="base-layout-grid">
          <div className="create-time-grid border">
          <div className="create-time-header">
+         <div style={{fontSize: '50px', fontStyle: 'oblique'}}>Scribble
+         </div>
           Set Time Ranges to Meet
          </div>
 

@@ -10,9 +10,9 @@ const Day = (props) => {
 
   return(
     <div>
-
-
-
+      <div className="bold">
+        {props.day}
+      </div>
       <TimeRange
       handleFinalDate={props.handleFinalDate}
       finalChoice={props.finalChoice}

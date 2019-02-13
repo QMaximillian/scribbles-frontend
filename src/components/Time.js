@@ -56,19 +56,19 @@ class Time extends Component {
 
     if (this.props.canClick) {
     return(
-      <div className="meeting-container-meeting-times" style={{backgroundColor: `${this.state.toggleOn ? 'green' : '#e6e9ec'}`}}
+      <div className="meeting-container-meeting-times" style={{backgroundColor: `${this.state.toggleOn ? 'green' : ''}`}}
       onClick={this.handleToggle}>
-        <div>
+        <span>
           {moment(this.props.time).format("hh:mm a")} -
-        </div>
-        <div>
+        </span>
+        <span>
           {moment(this.props.time).add(this.props.interval, 'minutes').format("hh:mm a")}
-        </div>
+        </span>
       </div>
     )
   } else if (this.props.finalChoice) {
     return(
-      <div className="" style={{backgroundColor: `${this.state.toggleOn ? 'orange' : ''}`}}
+      <div style={{backgroundColor: `${this.state.toggleOn ? 'orange' : ''}`}}
       onClick={this.handleToggle}>
         <span>
           {moment(this.props.time).format("hh:mm a")} -
@@ -76,16 +76,16 @@ class Time extends Component {
         <span>
           {moment(this.props.time).add(this.props.interval, 'minutes').format("hh:mm a")}
         </span>
-        <span>
+        <div>
         {this.mappedMatch()}
-        </span>
+        </div>
       </div>
 
 
     )
   } else {
     return(
-      <div style={{backgroundColor: '#e6e9ec'}}>
+      <div>
       <span>
       {moment(this.props.time).format("hh:mm a")} -
       </span>
@@ -93,6 +93,7 @@ class Time extends Component {
       {moment(this.props.time).add(this.props.interval, 'minutes').format("hh:mm a")}
       </span>
       {this.mappedMatch()}
+      {console.log(this.mappedMatch())}
       </div>
     )
   }

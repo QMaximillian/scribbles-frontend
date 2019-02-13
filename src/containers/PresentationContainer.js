@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { fetchUser, fetchMeetingRange } from '../adapters/index'
 import moment from 'moment'
 import Day from '../components/Day'
-import { Jumbotron } from 'react-bootstrap'
+
 
 
 export default class PresentationContainer extends Component {
@@ -65,12 +65,15 @@ export default class PresentationContainer extends Component {
       return this.state.meetingTimes.map(meetingTime => {
         if (meetingTime.day.toString() === meetingRange.slice(0, 10)) {
         return (
+          <>
           <Day
             creator={this.state.users[0].first_name}
             joinedUsers={this.state.joinedUsers}
             canClick={this.state.canClick}
             meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
             interval={this.state.interval}/>
+            <br/>
+          </>
           )
         }
       })
@@ -86,17 +89,20 @@ export default class PresentationContainer extends Component {
      console.log(this.state.joinedUsers)
      if (this.state.users[0]) {
      return (
-       <Jumbotron>
-        <div>
-        <span>
+       <div className="base-layout-grid">
+        <div className="meeting-container-grid">
+        <div className="meeting-container-item-header">
           {this.state.users[0].first_name + ' ' + this.state.users[0].last_name}'s Poll
-          <br/>
-          {this.mappedMeetingRange()}
-        </span>
-        <span>
-        </span>
         </div>
-      </Jumbotron>
+        <div style={{fontSize: '50px',
+        fontStyle: 'oblique'}} className="presentation-container-header">Scribble
+          </div>
+          <div className="presentation-day-range">
+          {this.mappedMeetingRange()}
+          </div>
+          </div>
+        </div>
+
      )
    } else {
      return <div>LOADING...</div>

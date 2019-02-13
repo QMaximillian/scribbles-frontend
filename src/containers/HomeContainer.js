@@ -6,7 +6,8 @@ export default class HomeContainer extends Component {
      return (
         <div className="base-layout-grid">
           <div className="home-grid border">
-            <div className="home">
+          <div style={{fontSize: '50px', fontStyle: 'oblique'}}>Scribble</div>
+            <div style={{fontSize: '20px'}} className="home">
             Welcome to Scribble
             </div>
             <div>

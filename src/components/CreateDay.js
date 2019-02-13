@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CreateTimeRange from './CreateTimeRange'
 import moment from 'moment'
 import {fetchCreateTime} from '../adapters/index.js'
-import { Jumbotron } from 'react-bootstrap'
+
 
 class CreateDay extends Component {
   constructor(props) {
