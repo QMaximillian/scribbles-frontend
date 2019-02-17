@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { fetchUser, fetchMeetingRange } from '../adapters/index'
 import moment from 'moment'
 import Day from '../components/Day'
-
+var concatAll = require('concat-all')
 
 
 export default class PresentationContainer extends Component {
@@ -26,8 +26,9 @@ export default class PresentationContainer extends Component {
 
   componentDidMount() {
     fetchMeetingRange(this.props.match.params.id).then(resp => {
-      console.log(resp)
+      console.log(resp.meeting_range)
       const datesArray = this.getDates(resp.meeting_range.begin_date, resp.meeting_range.end_date)
+
 
       this.setState({
         meetingTimes: resp.meeting_time,
@@ -59,28 +60,56 @@ export default class PresentationContainer extends Component {
     return dateArray;
   }
 
-  mappedMeetingRange = () => {
-    // Something other than map that doesn't return values if they do not match
-    return this.state.meetingRange.map(meetingRange => {
-      return this.state.meetingTimes.map(meetingTime => {
-        if (meetingTime.day.toString() === meetingRange.slice(0, 10)) {
-        return (
-          <>
-          <Day
-            creator={this.state.users[0].first_name}
-            joinedUsers={this.state.joinedUsers}
-            canClick={this.state.canClick}
-            meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
-            interval={this.state.interval}/>
-            <br/>
-          </>
-          )
-        }
-      })
-    })
+  // mappedMeetingRange = () => {
+  //   // Something other than map that doesn't return values if they do not match
+  //   return this.state.meetingRange.map(meetingRange => {
+  //     return this.state.meetingTimes.map(meetingTime => {
+  //       if (meetingTime.day.toString() === meetingRange.slice(0, 10)) {
+  //       return (
+  //         <>
+  //         <Day
+  //           creator={this.state.users[0].first_name}
+  //           joinedUsers={this.state.joinedUsers}
+  //           canClick={this.state.canClick}
+  //           meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
+  //           interval={this.state.interval}/>
+  //           <br/>
+  //         </>
+  //         )
+  //       }
+  //     })
+  //   })
+  // }
+
+  mappedMeetingRangeV2 = () => {
+
+    const availableTimes = this.state.meetingRange
+        .map((meetingRange, i) => (
+          this.state.meetingTimes
+            .filter(meetingTime => {
+        return meetingTime.day === meetingRange.slice(0, 10)})))
+
+
+        return concatAll(availableTimes)
+          .map((time, i) => {
+            return (
+              <>
+                <div>
+                  <Day
+                    handleFinalDate={this.handleFinalDate}
+                    finalChoice={this.state.finalChoice}
+                    creator={this.state.users[0].first_name}
+                    joinedUsers={this.state.joinedUsers}
+                    canClick={this.state.canClick}
+                    meetingTime={time}index={i + 1} day={moment(time.day).format('LL')}
+                    interval={this.state.interval}
+                  />
+                </div>
+                <br/>
+              </>
+            )
+          })
   }
-
-
   // fetch to create new User
   // fetch to create new meetingTimes associated with User
   // ability to send link through email to people you want to participate
@@ -98,7 +127,7 @@ export default class PresentationContainer extends Component {
         fontStyle: 'oblique'}} className="presentation-container-header">Scribble
           </div>
           <div className="presentation-day-range">
-          {this.mappedMeetingRange()}
+          {this.mappedMeetingRangeV2()}
           </div>
           </div>
         </div>

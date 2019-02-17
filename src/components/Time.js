@@ -40,16 +40,15 @@ class Time extends Component {
 
   mappedMatch = () => {
 
-    return this.props.joinedUsers.map(resp => {
-      return resp.meeting_times.map(meetingTime => {
-        if (moment(meetingTime.begin_time).format() === moment(this.props.time).format()) {
-
-          return (
+    return this.props.joinedUsers.map(resp => (
+      resp.meeting_times.map(meetingTime => (
+        moment(meetingTime.begin_time).format() === moment(this.props.time).format() ?
             <span>{this.props.creator === resp.users.first_name ? undefined : resp.users.first_name}</span>
+              :
+            null
           )
-        }
-      })
-    })
+      )
+    ))
   }
 
   render() {

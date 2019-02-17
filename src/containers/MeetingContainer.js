@@ -3,6 +3,7 @@ import { fetchMeetingRange, fetchUpdateMeetingRange, fetchCreateInvitation, fetc
 import moment from 'moment'
 import Day from '../components/Day'
 import { Redirect } from 'react-router-dom'
+var concatAll = require('concat-all')
 
 
 export default class MeetingContainer extends Component {
@@ -29,14 +30,16 @@ export default class MeetingContainer extends Component {
 
   componentDidMount() {
     fetchMeetingRange(this.props.match.params.id).then(resp => {
-      console.log(resp)
+
       const datesArray = this.getDates(resp.meeting_range.begin_date, resp.meeting_range.end_date)
 
-      let meetingTimeConvert = resp.meeting_time.map(meetingTime => {
-        return moment(meetingTime.day).format()
-      })
+      console.log(resp)
 
-      console.log(meetingTimeConvert)
+      // let meetingTimeConvert = resp.meeting_time.map(meetingTime => {
+      //   return moment(meetingTime.day).format()
+      // })
+      //
+      // console.log(meetingTimeConvert)
 
       this.setState({
         meetingTimes: resp.meeting_time,
@@ -57,6 +60,8 @@ export default class MeetingContainer extends Component {
     })
   }
 
+
+
   getDates = (startDate, stopDate) => {
     let dateArray = [];
     let currentDate = moment(startDate);
@@ -70,37 +75,69 @@ export default class MeetingContainer extends Component {
     return dateArray;
   }
 
-  mappedMeetingRange = () => {
-    // Something other than map that doesn't return values if they do not match
-    return this.state.meetingRange.map((meetingRange, i) => {
-      return this.state.meetingTimes.map(meetingTime => {
-        if (meetingTime.day === meetingRange.slice(0, 10)) {
-        return (
-          <>
-          <div>
-          <Day
-            handleFinalDate={this.handleFinalDate}
-            finalChoice={this.state.finalChoice}
-            creator={this.state.users[0].first_name}
-            joinedUsers={this.state.joinedUsers}
-            canClick={this.state.canClick}
-            meetingTime={meetingTime}index={i + 1} day={moment(meetingRange).format('LL')}
-            interval={this.state.interval}/>
-            </div>
-            <br/>
-            </>
-          )
 
-        }
-      })
-    })
+  // mappedMeetingRange = () => {
+  //   Something other than map that doesn't return values if they do not match
+  //   return this.state.meetingRange.map((meetingRange, i) => {
+  //     return this.state.meetingTimes.map(meetingTime => {
+  //       if (meetingTime.day === meetingRange.slice(0, 10)) {
+  //       return (
+  //         <>
+  //         <div>
+  //         <Day
+  //           handleFinalDate={this.handleFinalDate}
+  //           finalChoice={this.state.finalChoice}
+  //           creator={this.state.users[0].first_name}
+  //           joinedUsers={this.state.joinedUsers}
+  //           canClick={this.state.canClick}
+  //           meetingTime={meetingTime}index={i + 1} day={moment(meetingRange).format('LL')}
+  //           interval={this.state.interval}/>
+  //           </div>
+  //           <br/>
+  //           </>
+  //         )
+  //
+  //       }
+  //     })
+  //   })
+  // }
+
+  mappedMeetingRangeV2 = () => {
+
+    const availableTimes = this.state.meetingRange
+        .map((meetingRange, i) => (
+          this.state.meetingTimes
+            .filter(meetingTime => {
+        return meetingTime.day === meetingRange.slice(0, 10)})))
+
+
+        return concatAll(availableTimes)
+          .map((time, i) => {
+            return (
+              <>
+                <div>
+                  <Day
+                    handleFinalDate={this.handleFinalDate}
+                    finalChoice={this.state.finalChoice}
+                    creator={this.state.users[0].first_name}
+                    joinedUsers={this.state.joinedUsers}
+                    canClick={this.state.canClick}
+                    meetingTime={time}index={i + 1} day={moment(time.day).format('LL')}
+                    interval={this.state.interval}
+                  />
+                </div>
+                <br/>
+              </>
+            )
+          })
   }
+
 
 
   handleFinalDate = (date) => {
     this.setState({
       finalDate: date
-    }, () => console.log(this.state.finalDate))
+    })
   }
 
 
@@ -158,7 +195,7 @@ export default class MeetingContainer extends Component {
           Choose the date and click "End Poll" to submit
         </div>
         <div className="day-range">
-        {this.mappedMeetingRange()}
+        {this.mappedMeetingRangeV2()}
         </div>
         <div className="meeting-container-add-user">
           <label>
@@ -179,7 +216,7 @@ export default class MeetingContainer extends Component {
       </div>
      )
    } else {
-     return <div>{this.mappedMeetingRange()}</div>
+     return <div>{this.mappedMeetingRangeV2()}</div>
    }
    }
  }

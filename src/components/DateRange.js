@@ -9,6 +9,7 @@ const DateRange = (props) => {
     <div className={props.className1}>
       <label> First Day </label><br />
         <DatePicker
+         minDate={new Date()}
         style={{textColor: 'green'}}
          onChange={props.handleBeginDatePicker}
         selected={props.beginDate}/>
@@ -16,6 +17,7 @@ const DateRange = (props) => {
     <div className={props.className2}>
       <label> Last Day </label><br />
         <DatePicker
+         minDate={new Date()}
          onChange={props.handleEndDatePicker}
         selected={props.endDate}/>
     </div>

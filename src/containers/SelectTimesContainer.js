@@ -4,6 +4,7 @@ import moment from 'moment'
 import Day from '../components/Day'
 import User from '../components/User'
 import { withRouter } from 'react-router-dom'
+var concatAll = require('concat-all')
 
 
 class SelectTimesContainer extends Component {
@@ -51,23 +52,55 @@ class SelectTimesContainer extends Component {
     return dateArray;
   }
 
-  mappedMeetingRange = () => {
-    // Something other than map that doesn't return values if they do not match
-    return this.state.meetingRange.map(meetingRange => {
-      return this.state.meetingTimes.map(meetingTime => {
-        if (meetingTime.day.toString() === meetingRange.slice(0, 10)) {
-        return (
-          <Day
-            canClick={this.state.canClick}
-            user_id={this.state.user_id}
-            meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
-            interval={this.state.interval}
-            fetch={this.state.fetch}/>
-          )
-        }
-      })
-    })
+  // mappedMeetingRange = () => {
+  //   // Something other than map that doesn't return values if they do not match
+  //   return this.state.meetingRange.map(meetingRange => {
+  //     return this.state.meetingTimes.map(meetingTime => {
+  //       if (meetingTime.day.toString() === meetingRange.slice(0, 10)) {
+  //       return (
+  //         <Day
+  //           canClick={this.state.canClick}
+  //           user_id={this.state.user_id}
+  //           meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
+  //           interval={this.state.interval}
+  //           fetch={this.state.fetch}/>
+  //         )
+  //       }
+  //     })
+  //   })
+  // }
+
+  mappedMeetingRangeV2 = () => {
+
+    const availableTimes = this.state.meetingRange
+        .map((meetingRange, i) => (
+          this.state.meetingTimes
+            .filter(meetingTime => {
+        return meetingTime.day === meetingRange.slice(0, 10)})))
+
+
+        return concatAll(availableTimes)
+          .map((time, i) => {
+            return (
+              <>
+                <div>
+                  <Day
+                    handleFinalDate={this.handleFinalDate}
+                    finalChoice={this.state.finalChoice}
+                    creator={this.state.users[0].first_name}
+                    joinedUsers={this.state.joinedUsers}
+                    canClick={this.state.canClick}
+                    meetingTime={time}index={i + 1} day={moment(time.day).format('LL')}
+                    interval={this.state.interval}
+                  />
+                </div>
+                <br/>
+              </>
+            )
+          })
   }
+
+
 
   handleChange = (e) => {
     this.setState({
@@ -123,7 +156,7 @@ class SelectTimesContainer extends Component {
           Pick the dates that work
           </div>
         <div className="day-range">
-          {this.mappedMeetingRange()}
+          {this.mappedMeetingRangeV2()}
         </div>
         {this.state.fetch ? null :
         <button className="meeting-container-end-poll" onClick={this.handleFetchState}>Submit Times</button>}
