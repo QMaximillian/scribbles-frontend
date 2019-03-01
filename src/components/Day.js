@@ -15,16 +15,20 @@ const Day = (props) => {
       </div>
       <TimeRange
       handleFinalDate={props.handleFinalDate}
-      finalChoice={props.finalChoice}
+      adminView={props.adminView}
+      presentationView={props.presentationView}
+      addView={props.addView}
       creator={props.creator}
       day={props.day}
-      joinedUsers={props.joinedUsers}
-      canClick={props.canClick}
-      user_id={props.user_id}
+      users={props.users}
       beginTime={props.meetingTime.begin_time}
       endTime={props.meetingTime.end_time}
       interval={props.interval}
       fetch={props.fetch}
+      meetingTime={props.meetingTime}
+      joinedUsers={props.joinedUsers}
+      meetingRangeId={props.meetingRangeId}
+      user_id={props.user_id}
       />
     </div>
 

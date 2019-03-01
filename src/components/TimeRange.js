@@ -29,15 +29,19 @@ const TimeRange = (props) => {
     return getDateHoursMoment().map(time => {
       return <Time
             handleFinalDate={props.handleFinalDate}
-            finalChoice={props.finalChoice}
+            adminView={props.adminView}
+            presentationView={props.presentationView}
+            addView={props.addView}
             creator={props.creator}
-            joinedUsers={props.joinedUsers}
+            users={props.users}
             day={props.day}
-            canClick={props.canClick}
-            user_id={props.user_id}
             interval={props.interval}
             time={time}
-            fetch={props.fetch}/>
+            fetch={props.fetch}
+            meetingTime={props.meetingTime}
+            joinedUsers={props.joinedUsers}
+            meetingRangeId={props.meetingRangeId}
+            user_id={props.user_id}/>
     })
   }
 

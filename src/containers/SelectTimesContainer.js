@@ -72,11 +72,13 @@ class SelectTimesContainer extends Component {
 
   mappedMeetingRangeV2 = () => {
 
-    const availableTimes = this.state.meetingRange
-        .map((meetingRange, i) => (
-          this.state.meetingTimes
-            .filter(meetingTime => {
-        return meetingTime.day === meetingRange.slice(0, 10)})))
+    const availableTimes =
+    this.state.meetingRange.map((meetingRange, i) => (
+      this.state.meetingTimes.filter(meetingTime => {
+        return meetingTime.day === meetingRange.slice(0, 10)
+      })
+    )
+  )
 
 
         return concatAll(availableTimes)
@@ -90,7 +92,7 @@ class SelectTimesContainer extends Component {
                     creator={this.state.users[0].first_name}
                     joinedUsers={this.state.joinedUsers}
                     canClick={this.state.canClick}
-                    meetingTime={time}index={i + 1} day={moment(time.day).format('LL')}
+                    meetingTime={time} index={i + 1} day={moment(time.day).format('LL')}
                     interval={this.state.interval}
                   />
                 </div>

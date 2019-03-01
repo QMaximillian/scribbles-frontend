@@ -60,26 +60,7 @@ export default class PresentationContainer extends Component {
     return dateArray;
   }
 
-  // mappedMeetingRange = () => {
-  //   // Something other than map that doesn't return values if they do not match
-  //   return this.state.meetingRange.map(meetingRange => {
-  //     return this.state.meetingTimes.map(meetingTime => {
-  //       if (meetingTime.day.toString() === meetingRange.slice(0, 10)) {
-  //       return (
-  //         <>
-  //         <Day
-  //           creator={this.state.users[0].first_name}
-  //           joinedUsers={this.state.joinedUsers}
-  //           canClick={this.state.canClick}
-  //           meetingTime={meetingTime} day={moment(meetingRange).format('LL')}
-  //           interval={this.state.interval}/>
-  //           <br/>
-  //         </>
-  //         )
-  //       }
-  //     })
-  //   })
-  // }
+
 
   mappedMeetingRangeV2 = () => {
 
@@ -115,7 +96,6 @@ export default class PresentationContainer extends Component {
   // ability to send link through email to people you want to participate
 
    render() {
-     console.log(this.state.joinedUsers)
      if (this.state.users[0]) {
      return (
        <div className="base-layout-grid">
